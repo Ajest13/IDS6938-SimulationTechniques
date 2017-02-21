@@ -13,7 +13,7 @@ Compute the dy/dx
 */
 double df(double x, double y)            //function for defining dy/dx
 {
-    return y - (1 / 2)*exp(x / 2)*sin(5 * x) + 5 * exp(x / 2)*cos(5 * x);
+    return y - (1.0 / 2.0)*exp(x / 2.0)*sin(5.0 * x) + 5.0 * exp(x / 2.0)*cos(5.0 * x);
 }
 
 
@@ -22,7 +22,7 @@ Compute the exact answer
 */
 double exact(double x)            //function for defining dy/dx
 {
-    return exp(x / 2)*sin(5 * x);
+    return exp(x / 2.0)*sin(5.0 * x);
 }
 
 
@@ -79,9 +79,9 @@ std::string toString(double x, double y_euler, double y_midpoint, double y_RK4, 
 	out << std::setprecision(presision) << y_midpoint << "\t";
 	out << std::setprecision(presision) << y_RK4 << "\t";
 	out << std::setprecision(presision) << y_exact << "\t";
-	out << std::setprecision(5) << error(exact(x), y_euler) << "%\t";
-	out << std::setprecision(5) << error(exact(x), y_midpoint) << "%\t";
-	out << std::setprecision(5) << error(exact(x), y_RK4)<<"%";
+	out << std::setprecision(3) << error(exact(x), y_midpoint) << "%\t";
+	out << std::setprecision(3) << error(exact(x), y_RK4)<<"%";
+	out << std::setprecision(3) << error(exact(x), y_euler) << "%\t";
 	
 	return   out.str();
 }
@@ -92,11 +92,14 @@ std::string toString(double x, double y_euler, double y_midpoint, double y_RK4, 
 int main()
 {
 
-    double y_euler = 0.0;
-	double y_midpoint = 0.0;
-	double y_RK4 = 0.0;
-    double x = 0.0;
-    double h = 0.1;
+    double y_euler = 0.00;
+	double y_midpoint = 0.00;
+	double y_RK4 = 0.00;
+    double x = 0.00;
+	double xb = 10.00;   // addition
+	double h = .1;
+
+	int range = (xb - x) / h;  //addition
 
 	std::cout << std::fixed << std::showpoint;
     // Header information for column printouts
@@ -108,7 +111,7 @@ int main()
 	//intial values
 	std::cout<< toString(x, y_euler, y_midpoint, y_RK4, exact(x), 10) << std::endl;
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < range; i++)
     {
 		y_euler = rk1(y_euler,h,x);  //caculate y_{i+1}
 		y_midpoint = rk2(y_midpoint, h, x);  //caculate y_{i+1}
