@@ -16,11 +16,11 @@ df:  y - (1.0 / 2.0) * exp(x / 2.0) * sin(5.0 * x) + 5.0 * exp(x / 2.0) * cos(5.
 exact:  exp(x / 2.0)* sin(5.0 * x)
 
 ######(c) Run three numerical integration solutions: RK1, RK2, and RK4 to generate the numerical and exact values. To start use h = 0.1, for x =< 0.0, 10.0 >. (Hint: this produces 100 values for each solution.) Graph the results of RK1, RK2, and RK4 and the exact solution. (Use whatever approach you like to graph this data: R, Python, Matlab, Excel - you should produce a graph with 4 curves.)
-![](images/Numerical Integration Values.png?raw=true)
+![](images/NumericalIntegrationValues.png?raw=true)
 
 ######(d)Plot the error percentages for RK1, RK2, and RK4 in another graph. Remeber the error is defined as : |(exact - approx)| / exact
 
-![](images/Percent Error Integration.png?raw=true)
+![](images/PercentErrorIntegration.png?raw=true)
 
 ######(e)Vary the step size h = n where you define three n values for 
 ######x =< 0.0, 10.0 >.
@@ -28,8 +28,8 @@ exact:  exp(x / 2.0)* sin(5.0 * x)
 
 Stepsizes used were. n = .5; n = 1; n = 2
 
-![](images/Varying Stepsizes.png?raw=true)
-![](images/Percent Error for Varying Steps.png?raw=true)
+![](images/VaryingStepsizes.png?raw=true)
+![](images/PercentErrorforVaryingSteps.png?raw=true)
 
 ######(f)Analyze your results: (1) Describe how varying the integration method changes the accuracy. (2) What happens as you increase the x value to the accuracy. (3) How does varying the step size effect the accuracy. (4) Which method is the most accurate and why (in particular explain what is taken to account in the solution).
 
