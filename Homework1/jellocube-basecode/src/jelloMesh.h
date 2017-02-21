@@ -17,6 +17,7 @@ public:
         const World& world,
         const vec3& externalForces = vec3(0.0, -9.8, 0));
 
+
     // Draw our JelloMesh
     virtual void Draw(const vec3& eyePos);
 
@@ -112,6 +113,7 @@ protected:
     float m_width, m_height, m_depth;
     unsigned int m_drawflags;
     vec3 m_externalForces;
+	vec3 m_floatyForces;
 
     IntegrationType m_integrationType;
     std::vector<FaceMesh> m_mesh;

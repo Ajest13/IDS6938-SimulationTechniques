@@ -1,16 +1,41 @@
 #Homework 1 : The Jello Cube (Continuous Simulation Assignment
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
-#GUIDE- General TARDIS build dimensions:
-Door/wall heihts: 6'6"
-Door width: 18" approx
-Center door divide width: 2"
-Corner post widths: 6"
-Sign box lintel height: 6"
-Window/panel height: 15"
-Window/panel width: 12"
-Base height: 3-4"
-Base width: 52-53"
+#####Alexander Almodovar
+
+######(a) Solve for the exact symbolic (analytical) solution. (Hint: take the integral.)
+
+Exact: y(x) = e^(x/2) sin(5 x)
+
+######(b) After step (a) you have the values for the df and exact functions. Translate the mathematical formulas you now have into the df and exact functions.
+
+Funtions: 
+
+df:  y - (1.0 / 2.0) * exp(x / 2.0) * sin(5.0 * x) + 5.0 * exp(x / 2.0) * cos(5.0 * x)
+
+exact:  exp(x / 2.0)* sin(5.0 * x)
+
+######(c) Run three numerical integration solutions: RK1, RK2, and RK4 to generate the numerical and exact values. To start use h = 0.1, for x =< 0.0, 10.0 >. (Hint: this produces 100 values for each solution.) Graph the results of RK1, RK2, and RK4 and the exact solution. (Use whatever approach you like to graph this data: R, Python, Matlab, Excel - you should produce a graph with 4 curves.)
+![](images/Numerical Integration Values.png?raw=true)
+
+######(d)Plot the error percentages for RK1, RK2, and RK4 in another graph. Remeber the error is defined as : |(exact - approx)| / exact
+
+![](images/Percent Error Integration.png?raw=true)
+
+######(e)Vary the step size h = n where you define three n values for 
+######x =< 0.0, 10.0 >.
+######Plot the results just for RK4 with 3 different n values (with the exact solution). Plot the error rate.
+
+Stepsizes used were. n = .5; n = 1; n = 2
+
+![](images/Varying Stepsizes.png?raw=true)
+![](images/Percent Error for Varying Steps.png?raw=true)
+
+######(f)Analyze your results: (1) Describe how varying the integration method changes the accuracy. (2) What happens as you increase the x value to the accuracy. (3) How does varying the step size effect the accuracy. (4) Which method is the most accurate and why (in particular explain what is taken to account in the solution).
+
+The results show that as you increase the number of orders of integration the simulations become more accurate. This is the same result on accuracy when increasing the number of steps sizes (decreasing step size). As you decrease the step size, the simulation becomes more accurate. RK4, also known as fourth-order Runge Kutta method, is the most accurate because the first error term is taken from the 5th derivative term versus Euler’s method (RK1)  which is taken from the 2nd derivative term. In other words, Eulers method’s error is defined as (h/2)^2 giving you ¼ of the error. On the other hand, RK4 gets the first four derivatives correct and therefore the error is defined as (h/2)^5 giving you 1/32 of the error. So as h gets smaller and the order method higher the accuracy is better.
+
+Data sheets can be found here : [Homework 1 Data](IntegrationData.xls)
 
 This is the framework for homework #1. Please first read the [homework writeup](HomeWork%231.pdf).
 
