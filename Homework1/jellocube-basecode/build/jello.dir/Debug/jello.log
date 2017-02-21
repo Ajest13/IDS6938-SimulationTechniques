@@ -1,7 +1,3 @@
 ﻿  jelloMesh.cpp
 C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\src\jelloMesh.cpp(255): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-tinyxmld_STL.lib(tinyxml.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-tinyxmld_STL.lib(tinyxml.obj) : warning LNK4099: PDB 'tinyxmlSTL.pdb' was not found with 'tinyxmld_STL.lib(tinyxml.obj)' or at 'C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\Debug\tinyxmlSTL.pdb'; linking object as if no debug info
-tinyxmld_STL.lib(tinyxmlerror.obj) : warning LNK4099: PDB 'tinyxmlSTL.pdb' was not found with 'tinyxmld_STL.lib(tinyxmlerror.obj)' or at 'C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\Debug\tinyxmlSTL.pdb'; linking object as if no debug info
-tinyxmld_STL.lib(tinyxmlparser.obj) : warning LNK4099: PDB 'tinyxmlSTL.pdb' was not found with 'tinyxmld_STL.lib(tinyxmlparser.obj)' or at 'C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\Debug\tinyxmlSTL.pdb'; linking object as if no debug info
   jello.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\Debug\jello.exe

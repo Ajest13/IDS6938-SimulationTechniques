@@ -15,7 +15,7 @@ double JelloMesh::g_penaltyKs = 0.0;
 double JelloMesh::g_penaltyKd = 0.0;
 
 JelloMesh::JelloMesh() :     
-    m_integrationType(JelloMesh::RK4), m_drawflags(MESH | STRUCTURAL),
+    m_integrationType(JelloMesh::EULER), m_drawflags(MESH | STRUCTURAL),
     m_cols(0), m_rows(0), m_stacks(0), m_width(0.0), m_height(0.0), m_depth(0.0)
 {
 	m_floatyForces = vec3(0.0, 19.6, 0);
@@ -471,10 +471,10 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
 
 bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 {
-	World.m_shapes[l]->GetType() == World::GROUND;
+	//World.m_shapes[l]->GetType() == World::GROUND;
 	//return p.position[1] < ground.pos[1];// TODO
 	//cout << p.position[1] << endl;
-	//return false;
+	return false;
 }
 
 bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, 
@@ -504,7 +504,7 @@ void JelloMesh::EulerIntegrate(double dt)
 				Particle& s = GetParticle(source, i, j, k);
 
 				Particle& k1 = GetParticle(accum1, i, j, k);
-				k1.force = halfdt * s.force * 1 / s.mass;
+				k1.force = halfdt * s.force * 1.0 / s.mass;
 				k1.velocity = halfdt * s.velocity;
 
 				Particle& t = GetParticle(target, i, j, k);
@@ -512,7 +512,21 @@ void JelloMesh::EulerIntegrate(double dt)
 				t.position = s.position + k1.velocity;
 			}
 		}
+	}
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				Particle& p = GetParticle(m_vparticles, i, j, k);
+				Particle& k1 = GetParticle(accum1, i, j, k);
 
+				p.velocity = p.velocity + k1.force;
+
+				p.position = p.position + k1.velocity;
+			}
+		}
 	}
 }
 
@@ -561,6 +575,22 @@ void JelloMesh::MidPointIntegrate(double dt)
 				Particle& s = GetParticle(source, i, j, k);
 				t.velocity = s.velocity + k2.force;
 				t.position = s.position + k2.velocity;
+			}
+		}
+	}
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				Particle& p = GetParticle(m_vparticles, i, j, k);
+				Particle& k1 = GetParticle(accum1, i, j, k);
+				Particle& k2 = GetParticle(accum2, i, j, k);
+
+				p.velocity = p.velocity + k2.force;
+
+				p.position = p.position +  k2.velocity;
 			}
 		}
 	}
