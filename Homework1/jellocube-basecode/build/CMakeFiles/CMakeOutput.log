@@ -9,7 +9,7 @@ The output was:
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:27 PM.
+Build started 2/23/2017 11:44:16 AM.
 Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\3.8.0-rc1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -35,7 +35,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.94
+Time Elapsed 00:00:01.48
 
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -54,7 +54,7 @@ The output was:
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:28 PM.
+Build started 2/23/2017 11:44:17 AM.
 Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\3.8.0-rc1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -80,7 +80,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.86
+Time Elapsed 00:00:01.12
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -92,153 +92,153 @@ The CXX compiler identification is MSVC, found in "C:/Users/Alex A/Desktop/IDS69
 Determining if the C compiler works passed with the following output:
 Change Dir: C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5c13f.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_3d787.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:30 PM.
-Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_5c13f.vcxproj" on node 1 (default targets).
+Build started 2/23/2017 11:44:19 AM.
+Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_3d787.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_5c13f.dir\Debug\".
+  Creating directory "cmTC_3d787.dir\Debug\".
   Creating directory "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_5c13f.dir\Debug\cmTC_5c13f.tlog\".
+  Creating directory "cmTC_3d787.dir\Debug\cmTC_3d787.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_5c13f.dir\Debug\cmTC_5c13f.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_3d787.dir\Debug\cmTC_3d787.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c13f.dir\Debug\\" /Fd"cmTC_5c13f.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCCompiler.c"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3d787.dir\Debug\\" /Fd"cmTC_3d787.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c13f.dir\Debug\\" /Fd"cmTC_5c13f.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCCompiler.c"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3d787.dir\Debug\\" /Fd"cmTC_3d787.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   
   testCCompiler.c
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_5c13f.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_5c13f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_5c13f.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_5c13f.dir\Debug\testCCompiler.obj
-  cmTC_5c13f.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_5c13f.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_3d787.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_3d787.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_3d787.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_3d787.dir\Debug\testCCompiler.obj
+  cmTC_3d787.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_3d787.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_5c13f.dir\Debug\cmTC_5c13f.tlog\unsuccessfulbuild".
-  Touching "cmTC_5c13f.dir\Debug\cmTC_5c13f.tlog\cmTC_5c13f.lastbuildstate".
-Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_5c13f.vcxproj" (default targets).
+  Deleting file "cmTC_3d787.dir\Debug\cmTC_3d787.tlog\unsuccessfulbuild".
+  Touching "cmTC_3d787.dir\Debug\cmTC_3d787.tlog\cmTC_3d787.lastbuildstate".
+Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_3d787.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.00
+Time Elapsed 00:00:01.27
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_3b035.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5a742.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:31 PM.
-Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_3b035.vcxproj" on node 1 (default targets).
+Build started 2/23/2017 11:44:21 AM.
+Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_5a742.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_3b035.dir\Debug\".
+  Creating directory "cmTC_5a742.dir\Debug\".
   Creating directory "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_3b035.dir\Debug\cmTC_3b035.tlog\".
+  Creating directory "cmTC_5a742.dir\Debug\cmTC_5a742.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_3b035.dir\Debug\cmTC_3b035.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_5a742.dir\Debug\cmTC_5a742.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3b035.dir\Debug\\" /Fd"cmTC_3b035.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5a742.dir\Debug\\" /Fd"cmTC_5a742.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3b035.dir\Debug\\" /Fd"cmTC_3b035.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5a742.dir\Debug\\" /Fd"cmTC_5a742.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c"
   
   CMakeCCompilerABI.c
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_3b035.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_3b035.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_3b035.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_3b035.dir\Debug\CMakeCCompilerABI.obj
-  cmTC_3b035.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_3b035.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_5a742.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_5a742.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_5a742.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_5a742.dir\Debug\CMakeCCompilerABI.obj
+  cmTC_5a742.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_5a742.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_3b035.dir\Debug\cmTC_3b035.tlog\unsuccessfulbuild".
-  Touching "cmTC_3b035.dir\Debug\cmTC_3b035.tlog\cmTC_3b035.lastbuildstate".
-Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_3b035.vcxproj" (default targets).
+  Deleting file "cmTC_5a742.dir\Debug\cmTC_5a742.tlog\unsuccessfulbuild".
+  Touching "cmTC_5a742.dir\Debug\cmTC_5a742.tlog\cmTC_5a742.lastbuildstate".
+Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_5a742.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.95
+Time Elapsed 00:00:01.13
 
 
 Determining if the CXX compiler works passed with the following output:
 Change Dir: C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_22e1f.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_97227.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:32 PM.
-Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_22e1f.vcxproj" on node 1 (default targets).
+Build started 2/23/2017 11:44:23 AM.
+Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_97227.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_22e1f.dir\Debug\".
+  Creating directory "cmTC_97227.dir\Debug\".
   Creating directory "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_22e1f.dir\Debug\cmTC_22e1f.tlog\".
+  Creating directory "cmTC_97227.dir\Debug\cmTC_97227.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_22e1f.dir\Debug\cmTC_22e1f.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_97227.dir\Debug\cmTC_97227.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_22e1f.dir\Debug\\" /Fd"cmTC_22e1f.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_97227.dir\Debug\\" /Fd"cmTC_97227.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_22e1f.dir\Debug\\" /Fd"cmTC_22e1f.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_97227.dir\Debug\\" /Fd"cmTC_97227.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   
   testCXXCompiler.cxx
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_22e1f.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_22e1f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_22e1f.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_22e1f.dir\Debug\testCXXCompiler.obj
-  cmTC_22e1f.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_22e1f.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_97227.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_97227.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_97227.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_97227.dir\Debug\testCXXCompiler.obj
+  cmTC_97227.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_97227.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_22e1f.dir\Debug\cmTC_22e1f.tlog\unsuccessfulbuild".
-  Touching "cmTC_22e1f.dir\Debug\cmTC_22e1f.tlog\cmTC_22e1f.lastbuildstate".
-Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_22e1f.vcxproj" (default targets).
+  Deleting file "cmTC_97227.dir\Debug\cmTC_97227.tlog\unsuccessfulbuild".
+  Touching "cmTC_97227.dir\Debug\cmTC_97227.tlog\cmTC_97227.lastbuildstate".
+Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_97227.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.98
+Time Elapsed 00:00:01.23
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_7eabc.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8b205.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:33 PM.
-Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_7eabc.vcxproj" on node 1 (default targets).
+Build started 2/23/2017 11:44:24 AM.
+Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_8b205.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_7eabc.dir\Debug\".
+  Creating directory "cmTC_8b205.dir\Debug\".
   Creating directory "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_7eabc.dir\Debug\cmTC_7eabc.tlog\".
+  Creating directory "cmTC_8b205.dir\Debug\cmTC_8b205.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_7eabc.dir\Debug\cmTC_7eabc.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_8b205.dir\Debug\cmTC_8b205.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7eabc.dir\Debug\\" /Fd"cmTC_7eabc.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b205.dir\Debug\\" /Fd"cmTC_8b205.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7eabc.dir\Debug\\" /Fd"cmTC_7eabc.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b205.dir\Debug\\" /Fd"cmTC_8b205.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp"
   
   CMakeCXXCompilerABI.cpp
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_7eabc.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_7eabc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_7eabc.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_7eabc.dir\Debug\CMakeCXXCompilerABI.obj
-  cmTC_7eabc.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_7eabc.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b205.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b205.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b205.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_8b205.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTC_8b205.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b205.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_7eabc.dir\Debug\cmTC_7eabc.tlog\unsuccessfulbuild".
-  Touching "cmTC_7eabc.dir\Debug\cmTC_7eabc.tlog\cmTC_7eabc.lastbuildstate".
-Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_7eabc.vcxproj" (default targets).
+  Deleting file "cmTC_8b205.dir\Debug\cmTC_8b205.tlog\unsuccessfulbuild".
+  Touching "cmTC_8b205.dir\Debug\cmTC_8b205.tlog\cmTC_8b205.lastbuildstate".
+Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_8b205.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.03
+Time Elapsed 00:00:01.29
 
 
 
@@ -246,39 +246,39 @@ Time Elapsed 00:00:01.03
 Detecting CXX [] compiler features compiled with the following output:
 Change Dir: C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_9dcf0.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_99248.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/11/2017 12:37:35 PM.
-Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_9dcf0.vcxproj" on node 1 (default targets).
+Build started 2/23/2017 11:44:26 AM.
+Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_99248.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_9dcf0.dir\Debug\".
+  Creating directory "cmTC_99248.dir\Debug\".
   Creating directory "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_9dcf0.dir\Debug\cmTC_9dcf0.tlog\".
+  Creating directory "cmTC_99248.dir\Debug\cmTC_99248.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_9dcf0.dir\Debug\cmTC_9dcf0.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_99248.dir\Debug\cmTC_99248.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9dcf0.dir\Debug\\" /Fd"cmTC_9dcf0.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\feature_tests.cxx"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_99248.dir\Debug\\" /Fd"cmTC_99248.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\feature_tests.cxx"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9dcf0.dir\Debug\\" /Fd"cmTC_9dcf0.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\feature_tests.cxx"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_99248.dir\Debug\\" /Fd"cmTC_99248.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\feature_tests.cxx"
   
   feature_tests.cxx
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_9dcf0.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_9dcf0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_9dcf0.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_9dcf0.dir\Debug\feature_tests.obj
-  cmTC_9dcf0.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_9dcf0.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_99248.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_99248.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/CMakeTmp/Debug/cmTC_99248.lib" /MACHINE:X86 /SAFESEH   /machine:X86 cmTC_99248.dir\Debug\feature_tests.obj
+  cmTC_99248.vcxproj -> C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\Debug\cmTC_99248.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_9dcf0.dir\Debug\cmTC_9dcf0.tlog\unsuccessfulbuild".
-  Touching "cmTC_9dcf0.dir\Debug\cmTC_9dcf0.tlog\cmTC_9dcf0.lastbuildstate".
-Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_9dcf0.vcxproj" (default targets).
+  Deleting file "cmTC_99248.dir\Debug\cmTC_99248.tlog\unsuccessfulbuild".
+  Touching "cmTC_99248.dir\Debug\cmTC_99248.tlog\cmTC_99248.lastbuildstate".
+Done Building Project "C:\Users\Alex A\Desktop\IDS6938-SimulationTechniques\Homework1\jellocube-basecode\build\CMakeFiles\CMakeTmp\cmTC_99248.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.11
+Time Elapsed 00:00:01.25
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
