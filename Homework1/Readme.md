@@ -4,17 +4,18 @@
 #####Alexander Almodovar
 
 ######(a) Solve for the exact symbolic (analytical) solution. (Hint: take the integral.)
-
+~~~
 Exact: y(x) = e^(x/2) sin(5 x) = 2.71828^(0.5 x) sin(5 x)
-
+~~~
 ######(b) After step (a) you have the values for the df and exact functions. Translate the mathematical formulas you now have into the df and exact functions.
 
 Funtions: 
-
+~~~
 df:  y - (1.0 / 2.0) * exp(x / 2.0) * sin(5.0 * x) + 5.0 * exp(x / 2.0) * cos(5.0 * x)
-
+~~~
+~~~
 exact: y(x) = exp(x / 2.0)* sin(5.0 * x) = 2.71828 * exp(0.5 * x) sin(5.0 * x)
-
+~~~
 ######(c) Run three numerical integration solutions: RK1, RK2, and RK4 to generate the numerical and exact values. To start use h = 0.1, for x =< 0.0, 10.0 >. (Hint: this produces 100 values for each solution.) Graph the results of RK1, RK2, and RK4 and the exact solution. (Use whatever approach you like to graph this data: R, Python, Matlab, Excel - you should produce a graph with 4 curves.)
 ![](images/NumericalIntegrationValues.PNG?raw=true)
 
