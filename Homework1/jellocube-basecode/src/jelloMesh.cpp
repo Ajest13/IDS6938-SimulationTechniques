@@ -469,8 +469,8 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
        Particle& p = GetParticle(grid, contact.m_p);
        vec3 normal = contact.m_normal; 
 	   double r = 0.5;
-	   p.force = p.force * -2;
-	   p.velocity = p.velocity - 2 * (p.velocity * normal) * normal *r;
+	   p.force = p.force * -10;
+       p.velocity = p.velocity - 2 * (p.velocity * normal) * normal *r;
 	   ComputeForces(grid);
 	// TODO
     }
@@ -484,9 +484,9 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
         Particle& pt = GetParticle(grid, result.m_p);
         vec3 normal = result.m_normal;
         float dist = result.m_distance;
-		float r = 0.5;
+		float r = 1.5;
 		pt.velocity = pt.velocity - 2 * (pt.velocity * normal) * normal *r;
-		pt.force = pt.force * -5.0;
+		pt.force = pt.force * -10.0;
 		//v-2(v * N)Nr
 		ComputeForces(grid);
 		// TODO
@@ -500,12 +500,12 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 	if (p.position[1] <= 0.0)
 	{
 		intersection.m_p = p.index;
-		intersection.m_distance = -p.position[1];
+		intersection.m_distance = p.position[1];
 		intersection.m_type = IntersectionType(COLLISION);
-		intersection.m_normal = vec3(0.0, 1.0, 0.0);
+		intersection.m_normal = vec3(0.0, 2.0, 0.0);
 		return true;
 	}
-	if (p.position.n[1] <= 0.2)
+	if (p.position.n[1] <= 0.05)
 	{
 		intersection.m_p = p.index;
 		intersection.m_distance = -p.position[1];
@@ -526,17 +526,26 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
     vec3 cylinderAxis = cylinderEnd - cylinderStart;
     double cylinderRadius = cylinder->r; 
 
-	//if (p.position.n[1] <= -5.50)
+	//if (p.position.n[1] <= 1.0)
 
 	//{
-		//result.m_normal = p.position;
+		//result.m_normal = vec3(0.0, 1.0, 0.0);
 		//result.m_type = IntersectionType(COLLISION);
 		//result.m_p = p.index;
-		//result.m_distance = p.position[1];
+		//result.m_distance = -p.position[1];
 
 		//return true;
 	//}
+	//if (p.position.n[1] <= 0.05)
 
+	//{
+		//result.m_normal = vec3(0.0, 1.0, 0.0);
+		//result.m_type = IntersectionType(CONTACT);
+		//result.m_p = p.index;
+		//result.m_distance = -p.position[1];
+
+		//return true;
+	//}
 	//else
 		return false;
 	// TODO
