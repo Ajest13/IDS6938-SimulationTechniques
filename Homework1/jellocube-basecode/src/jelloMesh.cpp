@@ -3,22 +3,22 @@
 #include <algorithm>
 
 // TODO
-double JelloMesh::g_structuralKs = 1200.0; 
-double JelloMesh::g_structuralKd = 4.0; 
-double JelloMesh::g_attachmentKs = 0.0;
-double JelloMesh::g_attachmentKd = 0.0;
-double JelloMesh::g_shearKs = 120.0;
-double JelloMesh::g_shearKd = 4.0;
-double JelloMesh::g_bendKs = 8.0;
-double JelloMesh::g_bendKd = 4.0;
-double JelloMesh::g_penaltyKs = 8.0;
-double JelloMesh::g_penaltyKd = 4.0;
+double JelloMesh::g_structuralKs = 5000.0; 
+double JelloMesh::g_structuralKd = 10.0; 
+double JelloMesh::g_attachmentKs = 500.0;
+double JelloMesh::g_attachmentKd = 10.0;
+double JelloMesh::g_shearKs = 10.0;
+double JelloMesh::g_shearKd = 10.0;
+double JelloMesh::g_bendKs = 10.0;
+double JelloMesh::g_bendKd = 10.0;
+double JelloMesh::g_penaltyKs = 10.0;
+double JelloMesh::g_penaltyKd = 10.0;
 
 JelloMesh::JelloMesh() :     
     m_integrationType(JelloMesh::RK4), m_drawflags(MESH | STRUCTURAL),
     m_cols(0), m_rows(0), m_stacks(0), m_width(0.0), m_height(0.0), m_depth(0.0)
 {
-	m_floatyForces = vec3(0.0, 19.6, 0);
+	//m_floatyForces = vec3(0.0, 19.6, 0);
     SetSize(1.0, 1.0, 1.0);
     SetGridSize(6, 6, 6);
 }
@@ -409,9 +409,9 @@ void JelloMesh::CheckForCollisions(ParticleGrid& grid, const World& world)
                     else if (world.m_shapes[i]->GetType() == World::GROUND && 
                         FloorIntersection(p, intersection))
                     {
-						if (intersection.m_type == COLLISION)//added
-							m_vcollisions.push_back(intersection);//added
-						else
+						//if (intersection.m_type == COLLISION)//added
+							//m_vcollisions.push_back(intersection);//added
+						//else
 							m_vcontacts.push_back(intersection);
                     }
                 }
@@ -430,7 +430,7 @@ void JelloMesh::ComputeForces(ParticleGrid& grid)
             for (int k = 0; k < m_stacks+1; k++)
             {
                 Particle& p = GetParticle(grid, i,j,k);
-                p.force = (m_externalForces) * p.mass;
+                p.force = m_externalForces * p.mass;
 				
             }
         }
@@ -446,21 +446,15 @@ void JelloMesh::ComputeForces(ParticleGrid& grid)
 		//const double ks = 1500; //testing constants
 		//const double kd = 10; //testing constants
 		vec3 pdiff = a.position - b.position;
-		vec3 vdiff = a.velocity - b.velocity;
+		vec3 vdiff = b.velocity - a.velocity;
 		double dist = pdiff.Length();
+
+		vec3 force = a.force + b.force;
 		
 		if (dist != 0) {
-			//vec3 force = a.force + b.force;   //  Newtons 3rd law
-			pdiff = pdiff / dist;
-			pdiff = pdiff *(-(spring.m_Ks*(dist - spring.m_restLen)) + (Dot(vdiff, pdiff)) * spring.m_Kd / dist );
-			
-			a.force += pdiff;
-			b.force += -pdiff;
-			
-			//a.force = m_vsprings[i].m_Ks * (vdiff * pdiff) / (dist) // original equations
-				//*(pdiff) / (dist) + a.force;
-			//b.force = m_vsprings[i].m_Kd * (vdiff * pdiff) / (dist)//original equations
-				//*(pdiff) / (dist) + b.force;
+			force = -(spring.m_Ks *(dist - spring.m_restLen) + spring.m_Kd * ((vdiff * pdiff)/dist)) * (pdiff/dist);
+			a.force += force;
+			b.force += -force;
 		}
 		
         // TODO
@@ -474,8 +468,10 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
        const Intersection& contact = m_vcontacts[i];
        Particle& p = GetParticle(grid, contact.m_p);
        vec3 normal = contact.m_normal; 
-
-	  
+	   double r = 0.5;
+	   p.force = p.force * -2;
+	   p.velocity = p.velocity - 2 * (p.velocity * normal) * normal *r;
+	   ComputeForces(grid);
 	// TODO
     }
 }
@@ -488,8 +484,11 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
         Particle& pt = GetParticle(grid, result.m_p);
         vec3 normal = result.m_normal;
         float dist = result.m_distance;
-
-		
+		float r = 0.5;
+		pt.velocity = pt.velocity - 2 * (pt.velocity * normal) * normal *r;
+		pt.force = pt.force * -5.0;
+		//v-2(v * N)Nr
+		ComputeForces(grid);
 		// TODO
 	}
 }
@@ -497,27 +496,26 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
 bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 {
 	//World::Ground->p.position[1];
-	if (p.position.n[1] <= 0.01);
+	
+	if (p.position[1] <= 0.0)
 	{
 		intersection.m_p = p.index;
-		intersection.m_distance = 0.0;
-		intersection.m_type = IntersectionType(CONTACT);
-		intersection.m_normal = p.position;
-		return true;
-	}
-	if (p.position[1] < 0.01)
-	{
-		intersection.m_p = p.index;
-		intersection.m_distance = 0.0;
+		intersection.m_distance = -p.position[1];
 		intersection.m_type = IntersectionType(COLLISION);
-		intersection.m_normal = p.position;
+		intersection.m_normal = vec3(0.0, 1.0, 0.0);
 		return true;
 	}
-	//return p.position[1] < ground.pos[1];// TODO
-	//cout << p.position[1] << endl;
+	if (p.position.n[1] <= 0.2)
+	{
+		intersection.m_p = p.index;
+		intersection.m_distance = -p.position[1];
+		intersection.m_type = IntersectionType(CONTACT);
+		intersection.m_normal = vec3(0.0, 1.0, 0.0);
+		return true;
+	}
+
 	else
 	return false;
-	//return true;
 }
 
 bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, 
@@ -528,18 +526,18 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
     vec3 cylinderAxis = cylinderEnd - cylinderStart;
     double cylinderRadius = cylinder->r; 
 
-	if (p.position.n[1] <= -5.50)
+	//if (p.position.n[1] <= -5.50)
 
-	{
-		result.m_normal = p.position;
-		result.m_type = IntersectionType(COLLISION);
-		result.m_p = p.index;
-		result.m_distance = 0.1;
+	//{
+		//result.m_normal = p.position;
+		//result.m_type = IntersectionType(COLLISION);
+		//result.m_p = p.index;
+		//result.m_distance = p.position[1];
 
-		return true;
-	}
+		//return true;
+	//}
 
-	else
+	//else
 		return false;
 	// TODO
 
@@ -555,7 +553,7 @@ void JelloMesh::EulerIntegrate(double dt)
 			{
 				Particle& p = GetParticle(m_vparticles, i, j, k);
 
-				p.velocity = p.velocity + dt * p.force;
+				p.velocity = p.velocity + dt * p.force * 1/p.mass;
 
 				p.position = p.position + dt * p.velocity;
 			}

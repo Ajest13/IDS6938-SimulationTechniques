@@ -1,3 +1,3 @@
-C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/jello.dir
-C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Alex A/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Owner/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/jello.dir
+C:/Users/Owner/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Owner/Desktop/IDS6938-SimulationTechniques/Homework1/jellocube-basecode/build/CMakeFiles/ZERO_CHECK.dir
