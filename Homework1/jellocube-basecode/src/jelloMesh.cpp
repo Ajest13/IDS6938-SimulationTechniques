@@ -497,7 +497,7 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
 	   vec3 diff = -dist * normal;
 
 	   p.force += g_penaltyKs * (dist * normal) + g_penaltyKd * (diff/dist);
-    }
+    } 
 }
 
 void JelloMesh::ResolveCollisions(ParticleGrid& grid)
@@ -510,7 +510,7 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
         float dist = result.m_distance;
 		double r = 0.75;
 
-		pt.position += dist * normal;
+		//pt.position += dist * normal;
 		pt.velocity += pt.velocity - 2 * (pt.velocity * normal) * normal * r;
 	}
 }
@@ -521,7 +521,7 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 	{
 		intersection.m_p = p.index;
 		intersection.m_distance = -p.position[1];
-		intersection.m_type = CONTACT;
+		intersection.m_type = CONTACT;   
 		intersection.m_normal = vec3(0.0, 1.0, 0.0);
 		return true;
 	}
