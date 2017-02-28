@@ -286,9 +286,9 @@ void World::Draw()
             }
 
             float m[16];
-            m[0] = left[0]; m[4] = up[0]; m[8] = forward[0];  m[12] = 0; 
-            m[1] = left[1]; m[5] = up[1]; m[9] = forward[1];  m[13] = 0; 
-            m[2] = left[2]; m[6] = up[2]; m[10] = forward[2]; m[14] = 0; 
+            m[0] = left[0]; m[4] = up[0]; m[8] = forward[0];  m[12] = c->start[0];
+            m[1] = left[1]; m[5] = up[1]; m[9] = forward[1];  m[13] = c->start[1];
+            m[2] = left[2]; m[6] = up[2]; m[10] = forward[2]; m[14] = c->start[2];
             m[3] = 0.0;  m[7] = 0.0;  m[11] = 0.0;  m[15] = 1.0;
 
             glPushMatrix();

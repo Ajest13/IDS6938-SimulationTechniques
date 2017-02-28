@@ -3,13 +3,13 @@
 #include <algorithm>
 
 // TODO
-double JelloMesh::g_structuralKs = 3500.0; 
+double JelloMesh::g_structuralKs = 2800.0; 
 double JelloMesh::g_structuralKd = 6.0; 
-double JelloMesh::g_attachmentKs = 0.0;
-double JelloMesh::g_attachmentKd = 0.0;
-double JelloMesh::g_shearKs = 1700.0;
+double JelloMesh::g_attachmentKs = 2000;
+double JelloMesh::g_attachmentKd = 6.0;
+double JelloMesh::g_shearKs = 2000.0;
 double JelloMesh::g_shearKd = 6.0;
-double JelloMesh::g_bendKs = 1700.0;
+double JelloMesh::g_bendKs = 2000.0;
 double JelloMesh::g_bendKd = 6.0;
 double JelloMesh::g_penaltyKs = 100000.0;
 double JelloMesh::g_penaltyKd = 6.0;
@@ -545,37 +545,30 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
     vec3 cylinderEnd = cylinder->end;
     vec3 cylinderAxis = cylinderEnd - cylinderStart;
 	double cylinderRadius = cylinder->r;
-	//vec3 normal = normal.Normalize();
-	//vec3 point = cylinderStart +  time * cylinderAxis;
-	//vec3 normal = p.position - point;
-	//double dist = normal.Length();
+	vec3 point = cylinderStart + cylinder->r * cylinderAxis;
+	vec3 normal = p.position - point;
+	double dist = normal.Length();
+	normal = normal.Normalize();
 	
 
-	//if (dist < cylinderRadius) 
-	//{
-		//result.m_p = p.index;
-		//result.m_distance =  -dist;
-		//result.m_type = CONTACT;
-		//return true;
-	//else {
-		//result.m_distance = 0;
-	//}
-	//}
-	//else if ()
-	//{
-		//result.m_p = p.index;
-		//result.m_distance = cylinderRadius - dist;
-		//result.m_type = COLLISION;
-		//result.m_normal = vec3(0.0, 1.0, 0.0);
-		//return true;
-	//}
-	//else
-	//{
+	if (dist < cylinderRadius + .075)
+	{
+		result.m_p = p.index;
+		result.m_distance = cylinderRadius;
+		result.m_type = CONTACT;
+		result.m_normal = normal;
+		return true;
+	}
 
-
-		return false;
-	//}
-
+	else if (dist < cylinderRadius + .1  && dist > cylinderRadius + .03)
+	{
+		result.m_p = p.index;
+		result.m_distance = cylinderRadius;
+		result.m_type = COLLISION;
+		result.m_normal = normal;
+		return true;
+	}
+	return false;
 }
 
 void JelloMesh::EulerIntegrate(double dt)
