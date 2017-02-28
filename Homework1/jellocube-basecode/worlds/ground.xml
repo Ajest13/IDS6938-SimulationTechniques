@@ -7,5 +7,5 @@
       <bodymaterial name="dirt" />
     </ground>
 	<cylinder r="0.1" sx="0.20" sy="0.00" sz="0.00" ex="2.00" ey="1.00" ez="0.00"></cylinder>
-  </bodies>
+ </bodies>
 </world>

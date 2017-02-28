@@ -8,7 +8,7 @@ double JelloMesh::g_structuralKd = 6.0;
 double JelloMesh::g_attachmentKs = 2000;
 double JelloMesh::g_attachmentKd = 6.0;
 double JelloMesh::g_shearKs = 2000.0;
-double JelloMesh::g_shearKd = 6.0;
+double JelloMesh::g_shearKd = 5.0;
 double JelloMesh::g_bendKs = 2000.0;
 double JelloMesh::g_bendKd = 6.0;
 double JelloMesh::g_penaltyKs = 100000.0;
@@ -18,7 +18,6 @@ JelloMesh::JelloMesh() :
     m_integrationType(JelloMesh::RK4), m_drawflags(MESH | STRUCTURAL),
     m_cols(0), m_rows(0), m_stacks(0), m_width(0.0), m_height(0.0), m_depth(0.0)
 {
-	//m_floatyForces = vec3(0.0, 19.6, 0);
     SetSize(1.0, 1.0, 1.0);
     SetGridSize(6, 6, 6);
 }
@@ -496,7 +495,7 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
 	   double dist = contact.m_distance;
 	   vec3 normal = contact.m_normal; 
 	   vec3 diff = -dist * normal;
-	  
+
 	   p.force += g_penaltyKs * (dist * normal) + g_penaltyKd * (diff/dist);
     }
 }
@@ -551,7 +550,7 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
 	normal = normal.Normalize();
 	
 
-	if (dist < cylinderRadius + .075)
+	if (dist < cylinderRadius + 0.07)
 	{
 		result.m_p = p.index;
 		result.m_distance = cylinderRadius;
@@ -560,7 +559,7 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
 		return true;
 	}
 
-	else if (dist < cylinderRadius + .1  && dist > cylinderRadius + .03)
+	else if (dist < cylinderRadius + 0.1  && dist > cylinderRadius + 0.03)
 	{
 		result.m_p = p.index;
 		result.m_distance = cylinderRadius;
