@@ -80,6 +80,7 @@ protected:
 	virtual void ResolveContacts(ParticleGrid& grid);
     virtual bool FloorIntersection(Particle& p, Intersection& intersection);
     virtual bool CylinderIntersection(Particle& p, World::Cylinder* cylinder, Intersection& intersection);
+	virtual bool SphereIntersection(Particle& p, World::Sphere* sphere, JelloMesh::Intersection& result);
 
     virtual void ComputeForces(ParticleGrid& grid);
 	virtual void EulerIntegrate(double dt);

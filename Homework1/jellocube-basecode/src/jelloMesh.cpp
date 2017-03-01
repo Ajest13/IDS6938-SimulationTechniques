@@ -7,9 +7,9 @@ double JelloMesh::g_structuralKs = 2800.0;
 double JelloMesh::g_structuralKd = 6.0; 
 double JelloMesh::g_attachmentKs = 2000;
 double JelloMesh::g_attachmentKd = 6.0;
-double JelloMesh::g_shearKs = 2000.0;
+double JelloMesh::g_shearKs = 2500.0;
 double JelloMesh::g_shearKd = 5.0;
-double JelloMesh::g_bendKs = 2000.0;
+double JelloMesh::g_bendKs = 2500.0;
 double JelloMesh::g_bendKd = 6.0;
 double JelloMesh::g_penaltyKs = 100000.0;
 double JelloMesh::g_penaltyKd = 6.0;
@@ -437,10 +437,15 @@ void JelloMesh::CheckForCollisions(ParticleGrid& grid, const World& world)
                     {
                         m_vcontacts.push_back(intersection);
                     }
+
+					else if (world.m_shapes[i]->GetType() == World::SPHERE &&
+						SphereIntersection(p, (World::Sphere*) world.m_shapes[i], intersection))
+					{
+						m_vcontacts.push_back(intersection);
+					}
                     else if (world.m_shapes[i]->GetType() == World::GROUND && 
                         FloorIntersection(p, intersection))
                     {
-					
 							m_vcontacts.push_back(intersection);
                     }
                 }
@@ -496,7 +501,7 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
 	   vec3 normal = contact.m_normal; 
 	   vec3 diff = -dist * normal;
 
-	   p.force += g_penaltyKs * (dist * normal) + g_penaltyKd * (diff/dist);
+	   p.force = g_penaltyKs * (dist * normal) + g_penaltyKd * (diff/dist);
     } 
 }
 
@@ -536,40 +541,69 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 	else
 		return false;
 }
-
-bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, 
+bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, //Modifications made using Julie's WolframAlpha link posted on piazza
                                  JelloMesh::Intersection& result)
 {
     vec3 cylinderStart = cylinder->start;
     vec3 cylinderEnd = cylinder->end;
     vec3 cylinderAxis = cylinderEnd - cylinderStart;
+	vec3 cylinderDiff = cylinderStart - p.position;
+	double time = -(cylinderDiff * cylinderAxis)/(cylinderAxis.Length()*cylinderAxis.Length());
 	double cylinderRadius = cylinder->r;
-	vec3 point = cylinderStart + cylinder->r * cylinderAxis;
+	vec3 point = cylinderStart + time * cylinderAxis;
 	vec3 normal = p.position - point;
 	double dist = normal.Length();
 	normal = normal.Normalize();
 	
 
-	if (dist < cylinderRadius + 0.07)
+	if (dist < cylinderRadius)
 	{
 		result.m_p = p.index;
-		result.m_distance = cylinderRadius;
+		result.m_distance = cylinderRadius - dist;
 		result.m_type = CONTACT;
-		result.m_normal = normal;
+		result.m_normal = normal.Normalize();
 		return true;
 	}
 
-	else if (dist < cylinderRadius + 0.1  && dist > cylinderRadius + 0.03)
+	else if (dist < cylinderRadius)
 	{
 		result.m_p = p.index;
-		result.m_distance = cylinderRadius;
+		result.m_distance = dist - cylinderRadius;
 		result.m_type = COLLISION;
-		result.m_normal = normal;
+		result.m_normal = normal.Normalize();
 		return true;
 	}
 	return false;
 }
 
+bool JelloMesh::SphereIntersection(Particle& p, World::Sphere* sphere,
+							JelloMesh::Intersection& result)
+{
+	vec3 ptMid = sphere->pos;
+	double sphereRadius = sphere->r;
+	vec3 normal = p.position - ptMid;
+	double dist = normal.Length();
+
+	if (dist < sphereRadius)
+	{
+		result.m_distance = sphereRadius - dist;
+		result.m_p = p.index;
+		result.m_normal = normal.Normalize();
+		result.m_type = CONTACT;
+		return true;
+
+	}
+	if (dist < sphereRadius)
+	{
+		result.m_distance = dist - sphereRadius;
+		result.m_p = p.index;
+		result.m_normal = normal.Normalize();
+		result.m_type = COLLISION;
+		return true;
+
+	}
+	return false;
+}
 void JelloMesh::EulerIntegrate(double dt)
 {	
 	for (int i = 0; i < m_rows + 1; i++)
