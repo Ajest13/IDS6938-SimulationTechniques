@@ -35,9 +35,9 @@ Stepsizes used were. n = .5; n = 1; n = 2
 
 ######(f)Analyze your results: (1) Describe how varying the integration method changes the accuracy. (2) What happens as you increase the x value to the accuracy. (3) How does varying the step size effect the accuracy. (4) Which method is the most accurate and why (in particular explain what is taken to account in the solution).
 
-The results show that as you increase the number of orders of integration the simulations become more accurate. This is the same result on accuracy when increasing the number of steps (decreasing step size). As you decrease the step size, the simulation becomes more accurate. RK4, also known as fourth-order Runge Kutta method, is the most accurate because the first error term is taken from the 5th derivative term versus Euler’s method (RK1)  which is taken from the 2nd derivative term. In other words, Eulers method’s error is defined as (h/2)^2 giving you ¼ of the error. On the other hand, RK4 gets the first four derivatives correct and therefore the error is defined as (h/2)^5 giving you 1/32 of the error. So as h gets smaller and the order method higher the accuracy is better.
+The results show that as you increase the number of orders of integration the simulations become more accurate. This is the same result on accuracy when increasing the number of steps (decreasing step size). In other words, as you decrease the step size, the simulation becomes more accurate. RK4, also known as fourth-order Runge Kutta method, is the most accurate integration method because the first error term is taken from the 5th derivative term versus Euler’s method (RK1)  which is taken from the 2nd derivative term. In other words, Eulers method’s error is defined as (h/2)^2 giving you ¼ of the error. On the other hand, RK4 gets the first four derivatives correct and therefore the error is defined as (h/2)^5 giving you 1/32 of the error. So as h gets smaller and the order method gets higher the simulation becomes more accurate.
 
-The following chart shows the first 4 integration values for RK1, RK2, RK4, and exact. The full data shees are provided in the link below.
+The following chart shows the first 4 integration values for RK1, RK2, RK4, and exact. The full data sheets are provided in the link below.
 
 | RK1  | RK2 | RK4 | Exact |
 | ------------- | ------------- | ------------- | ------------- |
@@ -52,7 +52,7 @@ Data sheets can be found here : [Homework 1 Data](IntegrationData.xls)
 As hypothesized in Part 1, RK4 was the integration method that produced the best results. RK1 and RK2 required me to do some intersting things to the spring constants for the system to stabilize. I also found the need to modify the threshold values when using RK1 and RK2. Even then, the jello cube did not simulate accurately. RK4 or higher order methods are recommended for these types of collision system simulations. 
 
 #####Spring Constants
-I chose my Ks values to be very high to allow for the springs to have more "give". This allowed for the cube to squish and pull appropiately and similar to an actual cube of jello. My Kd values were set low so as to give the cube a sufficient "jiggly" look after a force had been applied. It took alot of experimentation to find the values that wouldnt destabilize the entire system but after a few tries these are the constants that worked for me:
+I chose my Ks values to be very high to allow for the springs to have the proper "give". This allowed for the cube to squish and pull appropiately and similar to an actual cube of jello. My Kd values were set low so as to give the cube a sufficient "jiggly" look after a force had been applied. It took alot of experimentation to find the values that wouldnt destabilize the entire system but after a few tries these are the constants that worked for me:
 
 ![](images/SpringConstants.PNG?raw=true)
 
@@ -74,18 +74,8 @@ I imediately relate Mass-spring systems to sports. Mass-spring simulations can b
 My jello cube behaves realistically as possible using RK4 integration. This could be improved by using other, more complex or higher level, integration methods such as Verlet.
 
 ######5)How would you model and simulate water (in terms of a continuous simulation)? 
-I would essentially create a collection of boxes similar to the jello cube simulation but at a much smaller scale. These boxes would affect each others velocity and density. Since water in incompressible it is slightly easier to model than other fluids. Incompressible fluids have a constant density and pressure. The mathematical model I would use are the Navier-Stokes Equations which are used to model fluid flow. 
+I would essentially create a collection of boxes similar to the jello cube simulation but at a much smaller scale. These boxes would affect each others velocity and density. Since water in incompressible it is slightly easier to model than other fluids. Incompressible fluids have a constant density and pressure. The mathematical model I would use incorporate the Navier-Stokes Equations which are used to model fluid flow. 
 
 [JelloCube Video Upload](https://youtu.be/3DZxEv-z7JM)
 
 
-
-
-Something
-
-| RK1  | RK2 | RK4 | Exact |
-| ------------- | ------------- | ------------- | ------------- |
-| 0.1  | 0.2 | 0.3 | 0.4 |
-| 0.1  | 0.2 | 0.3 | 0.4 | 
-| 0.1  | 0.2 | 0.3 | 0.4 | 
-| 0.1  | 0.2 | 0.3 | 0.4 | 
