@@ -1,7 +1,18 @@
 #Homework 1 : The Jello Cube (Continuous Simulation Assignment
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
-#####Alexander Almodovar
+####Alexander Almodovar
+
+#####Extra Features:
+--(5 points) Support collisions with other shapes, such as an inclined plane, cubes, and spheres
+(Implement JelloMesh::CubeCollision() , Implement JelloMesh::SphereCollision()). Make a
+new, interesting scene. 
+######Implemented spherical object ```JelloMesh::SphereCollision()```
+
+
+--(5 points) Create a movie of your jello cube environment, upload the video to youtube and
+link it in your assignment writeup.
+######A video of the simulaion running in different evironments is linked at the bottom of this document.
 
 ####Part 1
 ######(a) Solve for the exact symbolic (analytical) solution. (Hint: take the integral.)
@@ -51,11 +62,211 @@ Data sheets can be found here : [Homework 1 Data](IntegrationData.xls)
 
 As hypothesized in Part 1, RK4 was the integration method that produced the best results. RK1 and RK2 required me to do some intersting things to the spring constants for the system to stabilize. I also found the need to modify the threshold values when using RK1 and RK2. Even then, the jello cube did not simulate accurately. RK4 or higher order methods are recommended for these types of collision system simulations. 
 
-#####Spring Constants
+#####Particle forces
+After updating ```JelloMesh::EulerIntegration()``` and ```JelloMesh::MidpointIntegration()``` I began to implement additional forces to the particles besides gravity. The following is the is the block of code used to implement spring forces within ```JelloMesh::ComputeForces(ParticleGrid& grid)```
+```cpp
+ for(unsigned int i = 0; i < m_vsprings.size(); i++)
+    {
+        Spring& spring = m_vsprings[i];
+        Particle& a = GetParticle(grid, spring.m_p1);
+        Particle& b = GetParticle(grid, spring.m_p2);
+		
+		vec3 pdiff = a.position - b.position;
+		vec3 vdiff = b.velocity - a.velocity;
+		double dist = pdiff.Length();
+
+		vec3 force = a.force + b.force;
+		
+		if (dist != 0) {
+			force = -(spring.m_Ks *(dist - spring.m_restLen) + spring.m_Kd * ((vdiff * pdiff)/dist)) * (pdiff/dist);
+			a.force += force;
+			b.force += -force;
+		}
+```
+######Spring Constants
 I chose my Ks values to be very high to allow for the springs to have the proper "give". This allowed for the cube to squish and pull appropiately and similar to an actual cube of jello. My Kd values were set low so as to give the cube a sufficient "jiggly" look after a force had been applied. It took alot of experimentation to find the values that wouldnt destabilize the entire system but after a few tries these are the constants that worked for me:
+```cpp
+double JelloMesh::g_structuralKs = 2800.0; 
+double JelloMesh::g_structuralKd = 6.0; 
+double JelloMesh::g_attachmentKs = 2000;
+double JelloMesh::g_attachmentKd = 6.0;
+double JelloMesh::g_shearKs = 2500.0;
+double JelloMesh::g_shearKd = 5.0;
+double JelloMesh::g_bendKs = 2500.0;
+double JelloMesh::g_bendKd = 6.0;
+double JelloMesh::g_penaltyKs = 100000.0;
+double JelloMesh::g_penaltyKd = 6.0;
+```
+#####Collision Detection and Response
+The particles needed to be tested for collisions and contact. For ```JelloMesh::FloorCollision()```a threshold was created under the collisions block to detect the particles moving towards the object before contact. My collision delta in this case is 0.05. 
+To check against cylinders I used ```vec3 normal = p.position - point``` to account for the position of the particles at a certain time which I defined as:
+```cpp
+vec3 cylinderAxis = cylinderEnd - cylinderStart;
+vec3 cylinderDiff = cylinderStart - p.position;
+double time = -(cylinderDiff * cylinderAxis)/(cylinderAxis.Length()*cylinderAxis.Length());
+vec3 point = cylinderStart + time * cylinderAxis;
+```
+Likewise, I applied a check for spheres after modifying ground.xml, jelloMesh.h and jelloMesh.cpp to include spheres when checking for collisions.
+```cpp
+	vec3 ptMid = sphere->pos;
+	vec3 normal = p.position - ptMid;
+```
+Below is the final code implementing ```JelloMesh::FloorIntersection```,```JelloMesh::CylinderIntersection```and```JelloMesh::SphereIntersection```
+```cpp
+bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
+{
+	if (p.position.n[1] <= 0.0)
+	{
+		intersection.m_p = p.index;
+		intersection.m_distance = -p.position[1];
+		intersection.m_type = CONTACT;   
+		intersection.m_normal = vec3(0.0, 1.0, 0.0);
+		return true;
+	}
+	else if (p.position[1] < 0.0 + 0.05)
+	{
+		intersection.m_p = p.index;
+		intersection.m_distance = 0.05 - p.position[1];
+		intersection.m_type = COLLISION;
+		intersection.m_normal = vec3(0.0, 1.0, 0.0);
+		return true;
+	}
+	else
+		return false;
+}
 
-![](images/SpringConstants.PNG?raw=true)
+bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, JelloMesh::Intersection& result)
 
+{
+    vec3 cylinderStart = cylinder->start;
+    vec3 cylinderEnd = cylinder->end;
+    vec3 cylinderAxis = cylinderEnd - cylinderStart;
+	vec3 cylinderDiff = cylinderStart - p.position;
+	double time = -(cylinderDiff * cylinderAxis)/(cylinderAxis.Length()*cylinderAxis.Length());
+	double cylinderRadius = cylinder->r;
+	vec3 point = cylinderStart + time * cylinderAxis;
+	vec3 normal = p.position - point;
+	double dist = normal.Length();
+	normal = normal.Normalize();
+	
+
+	if (dist < cylinderRadius)
+	{
+		result.m_p = p.index;
+		result.m_distance = cylinderRadius - dist;
+		result.m_type = CONTACT;
+		result.m_normal = normal.Normalize();
+		return true;
+	}
+
+	else if (dist < cylinderRadius)
+	{
+		result.m_p = p.index;
+		result.m_distance = dist - cylinderRadius;
+		result.m_type = COLLISION;
+		result.m_normal = normal.Normalize();
+		return true;
+	}
+	return false;
+}
+
+bool JelloMesh::SphereIntersection(Particle& p, World::Sphere* sphere,
+							JelloMesh::Intersection& result)
+{
+	vec3 ptMid = sphere->pos;
+	double sphereRadius = sphere->r;
+	vec3 normal = p.position - ptMid;
+	double dist = normal.Length();
+
+	if (dist < sphereRadius)
+	{
+		result.m_distance = sphereRadius - dist;
+		result.m_p = p.index;
+		result.m_normal = normal.Normalize();
+		result.m_type = CONTACT;
+		return true;
+
+	}
+	if (dist < sphereRadius)
+	{
+		result.m_distance = dist - sphereRadius;
+		result.m_p = p.index;
+		result.m_normal = normal.Normalize();
+		result.m_type = COLLISION;
+		return true;
+
+	}
+	return false;
+}
+```
+Moving onto collision and penetration response you can see that the system calls for ```JelloMesh::ResolveCollisions(ParticleGrid& grid)``` to be when the particles are close but not inside the object. This allows for a change in velocity to be applied to the particles. Penetration represents a particle moving into an object. This is found in ```JelloMesh::ResolveContacts(ParticleGrid& grid)```. In this case, a stiff spring force is applied onto the particles outwards from the surface of the object.
+```cpp
+void JelloMesh::ResolveContacts(ParticleGrid& grid)
+{
+    for (unsigned int i = 0; i < m_vcontacts.size(); i++)
+    {
+       const Intersection& contact = m_vcontacts[i];
+       Particle& p = GetParticle(grid, contact.m_p);
+	   double dist = contact.m_distance;
+	   vec3 normal = contact.m_normal; 
+	   vec3 diff = -dist * normal;
+
+	   p.force = g_penaltyKs * (dist * normal) + g_penaltyKd * (diff/dist);
+    } 
+}
+
+void JelloMesh::ResolveCollisions(ParticleGrid& grid)
+{
+    for(unsigned int i = 0; i < m_vcollisions.size(); i++)
+    {
+        Intersection result = m_vcollisions[i];
+        Particle& pt = GetParticle(grid, result.m_p);
+        vec3 normal = result.m_normal;
+        float dist = result.m_distance;
+		double r = 0.75;
+
+		//pt.position += dist * normal;
+	pt.velocity += pt.velocity - 2 * (pt.velocity * normal) * normal * r;
+	}
+}
+```
+##### Extra Springs
+Lastly, I applied shear and bend springs to the particles to give the cube the realism of "Jello". I had a little fun with it set my shear and bend springs in a manner that my my jello cube extra "jiggly". (The particles were already initiated as part of the given framwork)
+```cpp
+	ParticleGrid& g = m_vparticles;
+ //Shear Springs   
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				if (j < m_cols && i < m_rows) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
+				if (j > 0 && i < m_rows) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j - 1, k));				
+				
+				if (j < m_cols && k < m_stacks) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k + 1));
+				if (j > 0 && k < m_stacks) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j - 1, k + 1));
+				
+				if (i < m_rows && k < m_stacks) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
+				if (i > 0 && k < m_stacks) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j, k + 1));
+			}
+		}
+	}
+
+// Bend Springs
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+			if (i < m_rows - 3) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i + 4, j, k));
+			if (j < m_cols - 3) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 4, k));
+			if (k < m_stacks - 3) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j, k + 4));
+			}
+		}
+	}
+```
 ####Part 3 - Written Questions
 ######1) What is the effect of the Ks and Kd parameters on the jello?.
 
@@ -76,6 +287,6 @@ My jello cube behaves realistically as possible using RK4 integration. This coul
 ######5)How would you model and simulate water (in terms of a continuous simulation)? 
 I would essentially create a collection of boxes similar to the jello cube simulation but at a much smaller scale. These boxes would affect each others velocity and density. Since water in incompressible it is slightly easier to model than other fluids. Incompressible fluids have a constant density and pressure. The mathematical model I would use incorporate the Navier-Stokes Equations which are used to model fluid flow. 
 
-[JelloCube Video Upload](https://youtu.be/3DZxEv-z7JM)
+[JelloCube Simulation Video](https://youtu.be/yh3nWMel7ts)
 
 
