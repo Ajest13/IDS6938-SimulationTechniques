@@ -3,6 +3,10 @@
 
 ####Alexander Almodovar
 
+Help Refereces: 
+Dr. Kider- Office hours, Piazza, and personal communication. Help with programming aspect.
+Julie Kent- Personal communication. Help with learning how to properly Debug
+Joe Wileman- Personal communication. Help with some math and physics concepts.
 #####Extra Features:
 --(5 points) Support collisions with other shapes, such as an inclined plane, cubes, and spheres
 (Implement JelloMesh::CubeCollision() , Implement JelloMesh::SphereCollision()). Make a
