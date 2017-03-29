@@ -2,7 +2,7 @@
 
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
-##Extension Request: 2 days
+###Extension Request: 2 days
 
 [University of Central Florida](http://www.ist.ucf.edu/grad/)
 This is the framework for homework #2. 
