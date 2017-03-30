@@ -82,7 +82,6 @@ int main(int argc, char* argv[])
 		   !Officer1.is_within_error_range(0.002) ||
 		   !Officer2.is_within_error_range(0.002) ||
 		   !Officer3.is_within_error_range(0.002) //||
-		   //!Boarding.is_within_error_range(0.002)
 		   ;)	   //TODO: add is_within_error_range check
 /*
 		Checkin.is_within_confidence_interval();//Double check to see if this is right
@@ -106,17 +105,14 @@ int main(int argc, char* argv[])
             case 0:
 				//TODO add_external_arrival() for your security gates;
 				Officer1.add_external_arrival();
-				//cust2.set_type(Customer::ARRIVAL());
 				break;
             case 1:
 				//TODO add_external_arrival() for your security gates;
 				Officer2.add_external_arrival();
-				//cust3.set_type(Customer::ARRIVAL());
 				break;
             case 2:
                 //TODO add_external_arrival() for your security gates;
 				Officer3.add_external_arrival();
-				//cust4.set_type(Customer::ARRIVAL());
 				break;
           }
           next++;
@@ -126,7 +122,6 @@ int main(int argc, char* argv[])
        {
 		   //TODO add_external_arrival(); on your final boarding MM1_Queue object
 		   Boarding.add_external_arrival();
-		   //cust5.set_type(Customer::ARRIVAL());
 
        }
    }
