@@ -64,7 +64,7 @@ We looked at different ways to generate [pseudo-random numbers](https://en.wikip
 
 * **(a) - 3pts:** Output the results of five different random number engines, using a uniform distribution for values between [0-100]. Generate useful charts and statistics from the output to analyze how uniform these values truly are. You are expected to look at some advanced statistics and test, for example: tests like the Kolmogorov-Smirnov test, Chi-square test, Autocorrelation test, and Spearman’s Rank Correlation Coefficient are a few examples of ones your could use.)
 
-![](images/Random NumberGeneratorsUniformDistribution.png?raw=true)
+![](images/RandomNumberGeneratorsUniformDistribution.png?raw=true)
 
 #####Descriptive Statistics
 
