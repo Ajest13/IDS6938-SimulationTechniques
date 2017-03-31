@@ -3613,7 +3613,7 @@
 				<Control Type="Window3D">
 					<Id>1490903526181</Id>
 					<Name><![CDATA[Qu3d]]></Name>
-					<X>0</X><Y>880</Y>
+					<X>10</X><Y>1120</Y>
 					<Width>500</Width>
 					<Height>300</Height>
 					<MakeDefaultViewArea>true</MakeDefaultViewArea>
