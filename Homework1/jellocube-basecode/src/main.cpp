@@ -29,9 +29,9 @@ bool isRecording = false;
 
 void initCamera()
 {
-   double w = theJello.GetWidth()*2;   
-   double h = theJello.GetHeight()*2;   
-   double d = theJello.GetDepth()*2;   
+	double w = 5; 
+	double h = 5; 
+	double d = 5; 
    double angle = 0.5*theCamera.dfltVfov*M_PI/180.0;
    double dist;
    if (w > h) dist = w*0.5/tan(angle);  // aspect is 1, so i can do this
@@ -142,9 +142,6 @@ void onKeyboardCb(unsigned char key, int x, int y)
    else if (key == '1') mask = theJello.MESH;
    else if (key == '2') mask = theJello.FORCES;
    else if (key == '3') mask = theJello.NORMALS;
-   else if (key == '4') mask = theJello.STRUCTURAL;
-   else if (key == '5') mask = theJello.SHEAR;
-   else if (key == '6') mask = theJello.BEND;
 
    if (mask)
    {

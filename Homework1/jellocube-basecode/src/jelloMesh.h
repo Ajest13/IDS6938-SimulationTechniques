@@ -25,16 +25,11 @@ public:
     virtual void Reset();
 
     // Set/Get our JelloMesh resolution
-    virtual void SetGridSize(int cols, int rows, int stacks);
-    virtual int GetGridCols() const;
-    virtual int GetGridRows() const;
-    virtual int GetGridStacks() const;
+
 
     // Set/Get our JelloMesh size (in world coordinates)
     virtual void SetSize(float width, float height, float depth);
-    virtual float GetWidth() const;
-    virtual float GetHeight() const;
-    virtual float GetDepth() const;
+
 
     // Set/Get our numerical integration type
     enum IntegrationType { EULER, MIDPOINT, RK4 };
@@ -45,8 +40,6 @@ public:
     virtual void SetDrawFlags(unsigned int flags);
     virtual unsigned int GetDrawFlags() const;
 
-    // Spring types
-    enum SpringType { STRUCTURAL = 0x1, SHEAR = 0x2, BEND = 0x4 }; 
 
     int GetIndex(int i, int j, int k) const;
     void GetCell(int idx, int& i, int &j, int &k) const;
@@ -55,8 +48,7 @@ public:
 protected:
 
     class Particle;
-    class Spring;
-    friend class FaceMesh;
+
     friend class TestJelloMesh;
 
     typedef std::vector<std::vector<std::vector<Particle>>> ParticleGrid;
@@ -65,14 +57,12 @@ protected:
     const Particle& GetParticle(const ParticleGrid& grid, int i, int j, int k) const;
     const Particle& GetParticle(const ParticleGrid& grid, int idx) const;
 
-    bool isInterior(const Spring& s) const;
+
     bool isInterior(int idx) const;
     bool isInterior(int i, int j, int k) const;
 
     virtual void InitJelloMesh();
-    virtual void AddStructuralSpring(Particle& p1, Particle& p2);
-    virtual void AddBendSpring(Particle& p1, Particle& p2);
-    virtual void AddShearSpring(Particle& p1, Particle& p2);
+
 
     class Intersection;
 	virtual void CheckForCollisions(ParticleGrid& grid, const World& world);
@@ -87,24 +77,10 @@ protected:
 	virtual void MidPointIntegrate(double dt);
 	virtual void RK4Integrate(double dt);
 
-    enum Face {XLEFT, XRIGHT, YTOP, YBOTTOM, ZFRONT, ZBACK};
-    class FaceMesh
-    {
-    public:
-        std::map<int,std::vector<int>> m_neighbors; 
-        std::vector<std::vector<int>> m_strips;
-        double distToEye;
+	virtual void DrawParticles();
 
-        FaceMesh(const JelloMesh& m, Face f);
-        void Draw(const JelloMesh& m);
-        void DrawNormals(const JelloMesh& m);
 
-        void CalcDistToEye(const JelloMesh& m, const vec3& eyePos);
-        static bool compare(const FaceMesh& one, const FaceMesh& other);
-    };
 
-    void DrawMesh(const vec3& eyePos);
-    void DrawSprings(double a);
     void DrawCollisionNormals();
     void DrawForces();
 
@@ -117,23 +93,16 @@ protected:
 	vec3 m_floatyForces;
 
     IntegrationType m_integrationType;
-    std::vector<FaceMesh> m_mesh;
+
     ParticleGrid m_vparticles;
 
-    std::vector<Spring> m_vsprings;
+
     std::vector<Intersection> m_vcontacts;
     std::vector<Intersection> m_vcollisions;
 
 public:
 
-    static double g_structuralKs;
-    static double g_structuralKd;
-    static double g_attachmentKs;
-    static double g_attachmentKd;
-    static double g_shearKs;
-    static double g_shearKd;
-    static double g_bendKs;
-    static double g_bendKd;
+
     static double g_penaltyKs;
     static double g_penaltyKd;
 
@@ -160,22 +129,7 @@ protected:
         static Particle EMPTY;
     };
 
-    class Spring
-    {
-    public:
-        Spring();
-        Spring(const Spring& p);
-        Spring& operator=(const Spring& p);
-        Spring(SpringType t, int p1, int p2, 
-            double Ks, double Kd, double restLen);
-
-        SpringType m_type;
-        int m_p1;
-        int m_p2;
-        double m_Ks;
-        double m_Kd;
-        double m_restLen;
-    };
+    
 
     enum IntersectionType { CONTACT, COLLISION };
     class Intersection

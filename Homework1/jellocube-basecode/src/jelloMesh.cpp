@@ -3,6 +3,7 @@
 #include <algorithm>
 
 // TODO
+<<<<<<< HEAD
 double JelloMesh::g_structuralKs = 2800.0; 
 double JelloMesh::g_structuralKd = 6.0; 
 double JelloMesh::g_attachmentKs = 2000;
@@ -13,13 +14,18 @@ double JelloMesh::g_bendKs = 2500.0;
 double JelloMesh::g_bendKd = 6.0;
 double JelloMesh::g_penaltyKs = 100000.0;
 double JelloMesh::g_penaltyKd = 6.0;
+=======
+
+double JelloMesh::g_penaltyKs = 0.0;
+double JelloMesh::g_penaltyKd = 0.0;
+>>>>>>> afa748385af523b86a45c7f4cac8aa8b4b612f21
 
 JelloMesh::JelloMesh() :     
-    m_integrationType(JelloMesh::RK4), m_drawflags(MESH | STRUCTURAL),
+    m_integrationType(JelloMesh::RK4), 
     m_cols(0), m_rows(0), m_stacks(0), m_width(0.0), m_height(0.0), m_depth(0.0)
 {
     SetSize(1.0, 1.0, 1.0);
-    SetGridSize(6, 6, 6);
+
 }
 
 JelloMesh::~JelloMesh()
@@ -55,62 +61,8 @@ const JelloMesh::Particle& JelloMesh::GetParticle(const JelloMesh::ParticleGrid&
     return GetParticle(grid, i,j,k);
 }
 
-bool JelloMesh::isInterior(const JelloMesh::Spring& s) const
-{
-    int i1,j1,k1,i2,j2,k2;
-    GetCell(s.m_p1, i1, j1, k1);
-    GetCell(s.m_p2, i2, j2, k2);
-    return isInterior(i1,j1,k1) || isInterior(i2,j2,k2);
-}
 
 
-bool JelloMesh::isInterior(int idx) const
-{
-    int i,j,k;
-    GetCell(idx, i, j, k);
-    return isInterior(i,j,k);
-}
-
-bool JelloMesh::isInterior(int i, int j, int k) const
-{
-    return (i*j*k*(m_rows-i)*(m_cols-j)*(m_stacks-k) != 0);
-}
-
-void JelloMesh::SetGridSize(int cols, int rows, int stacks)
-{
-    m_cols = cols;
-    m_rows = rows;
-    m_stacks = stacks;
-
-    if (m_cols > 0 && m_rows > 0 && m_stacks > 0)
-    {
-        m_vparticles.resize(m_rows+1);
-        for (int i = 0; i < m_rows+1; i++)
-        {
-            m_vparticles[i].resize(m_cols+1);
-            for (int j = 0; j < m_cols+1; j++)
-            {
-                m_vparticles[i][j].resize(m_stacks+1);
-            }
-        }
-    }
-    InitJelloMesh();
-}
-
-int JelloMesh::GetGridCols() const
-{
-    return m_cols;
-}
-
-int JelloMesh::GetGridRows() const
-{
-    return m_rows;
-}
-
-int JelloMesh::GetGridStacks() const
-{
-    return m_stacks;
-}
 
 void JelloMesh::SetSize(float width, float height, float depth)
 {
@@ -120,20 +72,7 @@ void JelloMesh::SetSize(float width, float height, float depth)
     InitJelloMesh();
 }
 
-float JelloMesh::GetWidth() const
-{
-    return m_width;
-}
 
-float JelloMesh::GetHeight() const
-{
-    return m_height;
-}
-
-float JelloMesh::GetDepth() const
-{
-    return m_depth;
-}
 
 int JelloMesh::GetIndex(int i, int j, int k) const
 {
@@ -161,6 +100,7 @@ void JelloMesh::GetCell(int idx, int& i, int &j, int& k) const
 
 void JelloMesh::InitJelloMesh()
 {
+<<<<<<< HEAD
 	m_vsprings.clear();
 
 	if (m_width < 0.01 || m_height < 0.01 || m_depth < 0.01) return;
@@ -246,19 +186,19 @@ void JelloMesh::AddStructuralSpring(Particle& p1, Particle& p2)
 {
     double restLen = (p1.position - p2.position).Length();
     m_vsprings.push_back(Spring(STRUCTURAL, p1.index, p2.index, g_structuralKs, g_structuralKd, restLen));
+=======
+
+	float x, y, z;
+	x = y = z = 0.0f;
+	m_vparticles.resize(10);
+    for (int i = 0; i <10; i++)
+    {
+		m_vparticles[i][j][k] = Particle(GetIndex(i, j, k), vec3(x, y, z));
+    }
+
+>>>>>>> afa748385af523b86a45c7f4cac8aa8b4b612f21
 }
 
-void JelloMesh::AddBendSpring(JelloMesh::Particle& p1, JelloMesh::Particle& p2)
-{
-    double restLen = (p1.position - p2.position).Length();
-    m_vsprings.push_back(Spring(BEND, p1.index, p2.index, g_bendKs, g_bendKd, restLen));
-}
-
-void JelloMesh::AddShearSpring(JelloMesh::Particle& p1, JelloMesh::Particle& p2)
-{
-    double restLen = (p1.position - p2.position).Length();
-    m_vsprings.push_back(Spring(SHEAR, p1.index, p2.index, g_shearKs, g_shearKd, restLen));
-}
 
 void JelloMesh::SetIntegrationType(JelloMesh::IntegrationType type)
 {
@@ -280,59 +220,6 @@ unsigned int JelloMesh::GetDrawFlags() const
     return m_drawflags;
 }
 
-void JelloMesh::DrawMesh(const vec3& eyePos)
-{
-    const ParticleGrid& g = m_vparticles;
-    float red[4] = {1.0,0.4,0.4,0.8};
-    float white[4] = {1.0,1.0,1.0,1.0};
-    float pink[4] = {0.5,0.0,0.0,1.0};
-    float black[4] = {0.0,0.0,0.0,1.0};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, red);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, black);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, black);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, pink);
-
-    for (unsigned int i = 0; i < m_mesh.size(); i++)
-    {        
-       m_mesh[i].CalcDistToEye(*this, eyePos);
-    }
-    std::sort(m_mesh.begin(), m_mesh.end(), FaceMesh::compare);
-    for (unsigned int i = 0; i < m_mesh.size(); i++)
-    {        
-       m_mesh[i].Draw(*this);
-    }
-
-    //glDisable(GL_LIGHTING);
-    //for (unsigned int i = 0; i < m_mesh.size(); i++)
-    //{        
-    //   m_mesh[i].DrawNormals(*this);
-    //}
-
-}
-
-void JelloMesh::DrawSprings(double a)
-{
-    const ParticleGrid& g = m_vparticles;
-    glBegin(GL_LINES);
-    for (unsigned int i = 0; i < m_vsprings.size(); i++)
-    {
-        if (!(m_vsprings[i].m_type & m_drawflags)) continue;
-        if (isInterior(m_vsprings[i])) continue;
-
-        switch (m_vsprings[i].m_type)
-        {
-        case BEND:       glColor4f(1.0, 1.0, 0.0, a); break;
-        case STRUCTURAL: glColor4f(1.0, 1.0, 0.0, a); break;
-        case SHEAR:      glColor4f(0.0, 1.0, 1.0, a); break;
-        };
-
-        vec3 p1 = GetParticle(g, m_vsprings[i].m_p1).position;
-        vec3 p2 = GetParticle(g, m_vsprings[i].m_p2).position;
-        glVertex3f(p1[0], p1[1], p1[2]);
-        glVertex3f(p2[0], p2[1], p2[2]);
-    }
-    glEnd();
-}
 
 void JelloMesh::DrawCollisionNormals()
 {
@@ -342,7 +229,7 @@ void JelloMesh::DrawCollisionNormals()
     for(unsigned int i = 0; i < m_vcollisions.size(); i++)
     {
        Intersection intersection = m_vcollisions[i];
-       if (isInterior(intersection.m_p)) continue;
+       //if (isInterior(intersection.m_p)) continue;
 
        const Particle& pt = GetParticle(g, intersection.m_p);
        vec3 normal = intersection.m_normal;
@@ -355,6 +242,7 @@ void JelloMesh::DrawCollisionNormals()
 
 void JelloMesh::DrawForces()
 {
+	glDisable(GL_LIGHTING);
     glBegin(GL_LINES);
     glColor3f(1.0, 0.0, 0.0);
     for (int i = 0; i < m_rows+1; i++)
@@ -364,7 +252,7 @@ void JelloMesh::DrawForces()
             for (int k = 0; k < m_stacks+1; k++)
             {
                 Particle p = m_vparticles[i][j][k];
-                if (isInterior(i,j,k)) continue;
+               // if (isInterior(i,j,k)) continue;
 
                 vec3 normal = p.force.Normalize();
                 vec3 end = p.position + 0.1 * normal;
@@ -374,27 +262,52 @@ void JelloMesh::DrawForces()
         }
     }     
     glEnd();
+	glEnable(GL_LIGHTING);
+}
+
+
+
+void JelloMesh::DrawParticles()
+{
+	glDisable(GL_LIGHTING);
+	glPointSize(18.0);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_NOTEQUAL, 0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_POINT_SMOOTH);
+	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+	glBegin(GL_POINTS);
+
+	glColor4f(1.0, 1.0, 0.0, 0.99);
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				Particle& p = GetParticle(m_vparticles, i, j, k);
+				glVertex3f(p.position[0], p.position[1], p.position[2]);
+
+			}
+		}
+	}
+	glEnd();
+	glEnable(GL_LIGHTING);
+
+
+	glDisable(GL_POINT_SMOOTH);
+	glBlendFunc(GL_NONE, GL_NONE);
+	glDisable(GL_BLEND);
+
+
+	return;
 }
 
 void JelloMesh::Draw(const vec3& eyePos)
 {
-    if (m_drawflags & MESH) DrawMesh(eyePos);
-
-    if (m_drawflags & (STRUCTURAL|BEND|SHEAR))
-    {
-        glDisable(GL_LIGHTING);
-        glDisable(GL_DEPTH_TEST);
-        glLineWidth(1.0);
-        DrawSprings(0.2);
-        glLineWidth(1.5);
-        glEnable(GL_DEPTH_TEST);
-        DrawSprings(0.4);
-    }
-
-    if (m_drawflags & NORMALS) DrawCollisionNormals();
-    if (m_drawflags & FORCES) DrawForces();
-
-    glEnable(GL_LIGHTING);
+	DrawParticles();
+	DrawForces();
 }
 
 void JelloMesh::Update(double dt, const World& world, const vec3& externalForces)
@@ -470,6 +383,7 @@ void JelloMesh::ComputeForces(ParticleGrid& grid)
         }
     }
 
+<<<<<<< HEAD
     // Update springs
     for(unsigned int i = 0; i < m_vsprings.size(); i++)
     {
@@ -489,6 +403,13 @@ void JelloMesh::ComputeForces(ParticleGrid& grid)
 			b.force += -force;
 		}
     }
+=======
+    // Update Flocking
+  // TODO
+
+
+    
+>>>>>>> afa748385af523b86a45c7f4cac8aa8b4b612f21
 }
 
 void JelloMesh::ResolveContacts(ParticleGrid& grid)
@@ -805,41 +726,8 @@ void JelloMesh::RK4Integrate(double dt)
 }
 
 
-//---------------------------------------------------------------------
-// Spring
-//---------------------------------------------------------------------
-JelloMesh::Spring::Spring() :
-    m_type(JelloMesh::STRUCTURAL), 
-    m_p1(-1), 
-    m_p2(-1), 
-    m_Ks(1.0), m_Kd(1.0), m_restLen(1.0)
-{
-}
 
-JelloMesh::Spring::Spring(const JelloMesh::Spring& p) :
-    m_type(p.m_type), m_p1(p.m_p1), m_p2(p.m_p2),
-    m_Ks(p.m_Ks), m_Kd(p.m_Kd), m_restLen(p.m_restLen)
-{
-}
 
-JelloMesh::Spring& JelloMesh::Spring::operator=(const JelloMesh::Spring& p)
-{
-    if (&p == this) return *this;
-
-    m_type = p.m_type;
-    m_p1 = p.m_p1;
-    m_p2 = p.m_p2;
-    m_Ks = p.m_Ks;
-    m_Kd = p.m_Kd;
-    m_restLen = p.m_restLen;
-    return *this;
-}
-
-JelloMesh::Spring::Spring(JelloMesh::SpringType t, 
-    int p1, int p2, double Ks, double Kd, double restLen) :
-    m_type(t), m_Ks(Ks), m_Kd(Kd), m_p1(p1), m_p2(p2), m_restLen(restLen)
-{
-}
 
 //---------------------------------------------------------------------
 // Particle
@@ -910,224 +798,3 @@ JelloMesh::Intersection::Intersection(IntersectionType type, int p, const vec3& 
 //---------------------------------------------------------------------
 // Drawing
 //---------------------------------------------------------------------
-
-void JelloMesh::FaceMesh::Draw(const JelloMesh& m)
-{
-    const ParticleGrid& g = m.m_vparticles;
-    for (unsigned int strip = 0; strip < m_strips.size(); strip++)
-    {
-        const std::vector<int>& points = m_strips[strip];
-
-        glBegin(GL_TRIANGLE_STRIP);
-        for (unsigned int pi = 0; pi < points.size(); pi++)
-        {
-            int idx = points[pi];
-            vec3 p = m.GetParticle(g, idx).position;
-
-            vec3 n(0,0,0);
-            const std::vector<int>& neighbors = m_neighbors[idx];
-            if (neighbors.size() > 0)
-            {
-                vec3 pup = m.GetParticle(g, neighbors[0]).position;
-                vec3 pdown = m.GetParticle(g, neighbors[1]).position;
-                vec3 pleft = m.GetParticle(g, neighbors[2]).position;
-                vec3 pright = m.GetParticle(g, neighbors[3]).position;
-
-                vec3 n1 = -((pright - p) ^ (pup - p));
-                vec3 n2 = -((pdown - p) ^ (pright - p));
-                vec3 n3 = -((pleft - p) ^ (pdown - p));
-                vec3 n4 = -((pup - p) ^ (pleft - p));
-
-                n = n1 + n2 + n3 + n4;
-                n = n.Normalize();
-            }
-
-            glNormal3f(n[0], n[1], n[2]);
-            glVertex3f(p[0], p[1], p[2]);
-        }
-        glEnd();
-    }
-}
-
-void JelloMesh::FaceMesh::DrawNormals(const JelloMesh& m)
-{
-    glDisable(GL_LIGHTING);
-
-    glBegin(GL_LINES);
-    glColor3f(0.0, 1.0, 0.0);
-
-    const ParticleGrid& g = m.m_vparticles;
-    for (unsigned int strip = 0; strip < m_strips.size(); strip++)
-    {
-        const std::vector<int>& points = m_strips[strip];
-        for (unsigned int pi = 0; pi < points.size(); pi++)
-        {
-            int idx = points[pi];
-            vec3 p = m.GetParticle(g, idx).position;
-
-            const std::vector<int>& neighbors = m_neighbors[idx];
-            if (neighbors.size() == 0) continue;
-
-            vec3 pup = m.GetParticle(g, neighbors[0]).position;
-            vec3 pdown = m.GetParticle(g, neighbors[1]).position;
-            vec3 pleft = m.GetParticle(g, neighbors[2]).position;
-            vec3 pright = m.GetParticle(g, neighbors[3]).position;
-
-            vec3 n1 = -((pright - p) ^ (pup - p));
-            vec3 n2 = -((pdown - p) ^ (pright - p));
-            vec3 n3 = -((pleft - p) ^ (pdown - p));
-            vec3 n4 = -((pup - p) ^ (pleft - p));
-
-            vec3 n = n1 + n2 + n3 + n4;
-            n = n.Normalize();
-
-            vec3 end = p + 0.2 * n;
-            glVertex3f(p[0], p[1], p[2]);
-            glVertex3f(end[0], end[1], end[2]);
-        }
-    }
-
-    glEnd();
-    glEnable(GL_LIGHTING);
-}
-
-#define R(i) max(0, min(i, m.m_rows)) // CLAMP row index
-#define C(j) max(0, min(j, m.m_cols)) // CLAMP col index
-#define D(j) max(0, min(j, m.m_stacks)) // CLAMP stack index
-JelloMesh::FaceMesh::FaceMesh(const JelloMesh& m, JelloMesh::Face f)
-{
-    const ParticleGrid& g = m.m_vparticles;
-    switch(f)
-    {
-    case ZFRONT:
-        m_strips.resize(m.m_rows);
-        for (int i = 0; i < m.m_rows+1; i++)
-            for (int j = 0; j < m.m_cols+1; j++)
-            {
-                if (i < m.m_rows)
-                {
-                    m_strips[i].push_back(m.GetIndex(i+1,j,0));
-                    m_strips[i].push_back(m.GetIndex(i,j,0));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(i), C(j+1), D(0)));
-                neighbors.push_back(m.GetIndex(R(i), C(j-1), D(0)));
-                neighbors.push_back(m.GetIndex(R(i-1), C(j), D(0)));
-                neighbors.push_back(m.GetIndex(R(i+1), C(j), D(0)));
-                m_neighbors[m.GetIndex(i,j,0)] = neighbors;
-            }
-        break;
-    case ZBACK:
-        m_strips.resize(m.m_rows);
-        for (int i = 0; i < m.m_rows+1; i++)
-            for (int j = 0; j < m.m_cols+1; j++)
-            {
-                if (i < m.m_rows)
-                {
-                    m_strips[i].push_back(m.GetIndex(i+1,j,m.m_stacks));
-                    m_strips[i].push_back(m.GetIndex(i,j,m.m_stacks));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(i+1), C(j), D(m.m_stacks)));
-                neighbors.push_back(m.GetIndex(R(i-1), C(j), D(m.m_stacks)));
-                neighbors.push_back(m.GetIndex(R(i), C(j-1), D(m.m_stacks)));
-                neighbors.push_back(m.GetIndex(R(i), C(j+1), D(m.m_stacks)));
-                m_neighbors[m.GetIndex(i,j,m.m_stacks)] = neighbors;
-            }
-        break;
-    case XLEFT:
-        m_strips.resize(m.m_cols);
-        for (int j = 0; j < m.m_cols+1; j++)
-            for (int k = 0; k < m.m_stacks+1; k++)
-            {
-                if (j < m.m_cols)
-                {
-                    m_strips[j].push_back(m.GetIndex(0,j+1,k));
-                    m_strips[j].push_back(m.GetIndex(0,j,k));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(0), C(j), D(k+1)));
-                neighbors.push_back(m.GetIndex(R(0), C(j), D(k-1)));
-                neighbors.push_back(m.GetIndex(R(0), C(j-1), D(k)));
-                neighbors.push_back(m.GetIndex(R(0), C(j+1), D(k)));
-                m_neighbors[m.GetIndex(0,j,k)] = neighbors;
-            }
-        break;
-    case XRIGHT:
-        m_strips.resize(m.m_cols);
-        for (int j = 0; j < m.m_cols+1; j++)
-            for (int k = 0; k < m.m_stacks+1; k++)
-            {
-                if (j < m.m_cols)
-                {
-                    m_strips[j].push_back(m.GetIndex(m.m_rows,j+1,k));
-                    m_strips[j].push_back(m.GetIndex(m.m_rows,j,k));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(m.m_rows), C(j+1), D(k)));
-                neighbors.push_back(m.GetIndex(R(m.m_rows), C(j-1), D(k)));
-                neighbors.push_back(m.GetIndex(R(m.m_rows), C(j), D(k-1)));
-                neighbors.push_back(m.GetIndex(R(m.m_rows), C(j), D(k+1)));
-                m_neighbors[m.GetIndex(m.m_rows,j,k)] = neighbors;
-            }
-        break;
-    case YBOTTOM:
-        m_strips.resize(m.m_rows);
-        for (int i = 0; i < m.m_rows+1; i++)
-            for (int k = 0; k < m.m_stacks+1; k++)
-            {
-                if (i < m.m_rows)
-                {
-                    m_strips[i].push_back(m.GetIndex(i+1,0,k));
-                    m_strips[i].push_back(m.GetIndex(i,0,k));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(i+1), C(0), D(k)));
-                neighbors.push_back(m.GetIndex(R(i-1), C(0), D(k)));
-                neighbors.push_back(m.GetIndex(R(i), C(0), D(k-1)));
-                neighbors.push_back(m.GetIndex(R(i), C(0), D(k+1)));
-                m_neighbors[m.GetIndex(i,0,k)] = neighbors;
-            }
-        break;
-    case YTOP:
-        m_strips.resize(m.m_rows);
-        for (int i = 0; i < m.m_rows+1; i++)
-            for (int k = 0; k< m.m_stacks+1; k++)
-            {
-                if (i < m.m_rows)
-                {
-                    m_strips[i].push_back(m.GetIndex(i+1,m.m_cols,k));
-                    m_strips[i].push_back(m.GetIndex(i,m.m_cols,k));
-                }
-
-                std::vector<int> neighbors;
-                neighbors.push_back(m.GetIndex(R(i), C(m.m_cols), D(k+1)));
-                neighbors.push_back(m.GetIndex(R(i), C(m.m_cols), D(k-1)));
-                neighbors.push_back(m.GetIndex(R(i-1), C(m.m_cols), D(k)));
-                neighbors.push_back(m.GetIndex(R(i+1), C(m.m_cols), D(k)));
-                m_neighbors[m.GetIndex(i,m.m_cols,k)] = neighbors;
-            }
-        break;
-    }
-}
-
-void JelloMesh::FaceMesh::CalcDistToEye(const JelloMesh& m, const vec3& eyePos)
-{
-    std::vector<int> points = m_strips[(int) (m_strips.size()*0.5)];
-    int idx = points[(int) (points.size()*0.5)];
-    vec3 pos = m.GetParticle(m.m_vparticles, idx).position;
-    distToEye = (pos - eyePos).Length();
-}
-
-bool JelloMesh::FaceMesh::compare(const FaceMesh& one, const FaceMesh& other)
-{
-    return one.distToEye > other.distToEye;
-}
-
-
-
