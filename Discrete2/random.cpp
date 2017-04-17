@@ -18,11 +18,12 @@ int main()
 	std::random_device rd;
 
 	// 1) Change random number generators
-	std::mt19937_64 engine(rd());
-	//std::knuth_b engine(rd());
-	//std::minstd_rand engine(rd());
-	//std::ranlux48 engine(rd());
-
+    //std::mt19937_64 engine(rd());//mersenne twister
+	//std::knuth_b engine(rd());//shuffle order
+	//std::minstd_rand engine(rd());//linear congruential
+	std::ranlux48 engine(rd());//discard block
+	//std::ranlux48_base engine(rd());//subtract with carry
+	
 
 	// Another seed intialization routine (this is just here for future reference for you.)
 	// initialize the random number generator with time-dependent seed
@@ -34,14 +35,20 @@ int main()
 	
 
 	//  2) - Change distribution types
-	std::uniform_real_distribution<> dist(0, 100);  // example of a uniform distribution
-	//std::normal_distribution<> dist(50,10);    // example of a normal distribution
-
+	std::uniform_real_distribution<> dist(0,100);  // example of a uniform distribution
+	//std::normal_distribution<> dist(50,30);    // example of a normal distribution
+	
+	//std::poisson_distribution<> dist(0);// Poisson distribution
+	//std::weibull_distribution<> dist(25, 50);//
+	//std::chi_squared_distribution<> dist(50);//
+	//std::binomial_distribution<> dist(100, .5);
+	//std::cauchy_distribution<> dist(50,1);//
 
 	auto generator = std::bind(dist, engine);
 
 	// 3) Play with N
-	unsigned int N = 100000;  // number of values generated
+	//unsigned int N = 100000;  // number of values generated
+	unsigned int N = 1000;
 	double randomValue;
 	std::map<int, int> hist; //Counts of discrete values
 	std::vector<double> raw; //raw random values 
@@ -57,11 +64,11 @@ int main()
 	for (auto p : hist) {
 		
 		// Uncomment if you want to see the values
-		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
-		//	<< p.first << " -  "<< p.second << std::endl;
-
 		std::cout << std::fixed << std::setprecision(1) << std::setw(2)
-			<< p.first << "  " << std::string(p.second / (N/500), '*') << std::endl;
+			<< p.first << " -  "<< p.second << std::endl;
+
+		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
+			//<< p.first << "  " << std::string(p.second / (N/500), '*') << std::endl;
 
 	}
 

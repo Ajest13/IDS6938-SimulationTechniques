@@ -20,6 +20,7 @@ int seed;
 int seed_in;
 int seed_out;
 
+
 double getQuasiRandomNumber(int *seed)
 {
 	i4_sobol(dim_num, seed, r);
@@ -38,7 +39,7 @@ void getNDimQuasiRandomNumber(int *seed, int dim_number, float *r)
 int main()
 {
 	r = new float[DIM_MAX];
-
+	
 	//use a random device
 	std::random_device rd;
 	// Another seed intialization routine (this is just here for future reference for you.)
@@ -49,17 +50,18 @@ int main()
 	//seed = rd();
 	//seed = ss;
 
-
+	int seed2 = rd() / 1000;
 
 	// 3) Play with N
-	unsigned int N = 100000;  // number of values generated
+	//unsigned int N = 100000;// number of values generated
+	unsigned int N = 1000;
 	double randomValue;
 	std::map<int, int> hist; //Counts of discrete values
 	std::vector<double> raw; //raw random values 
 
 
 	for (unsigned int i = 0; i < N; ++i) {
-		randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
+		randomValue = -1 + getQuasiRandomNumber(&seed) * 2;
 
 		++hist[std::round(randomValue)]; // count the values
 		raw.push_back(randomValue);  //push the raw values

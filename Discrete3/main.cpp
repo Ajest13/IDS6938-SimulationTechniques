@@ -9,7 +9,8 @@ int main(){
   std::vector< std::vector<double> > matrix(3,std::vector<double> (3)); //initializes a 3x3 matrix with zeros
 
   //set transition matrix
-  matrix[0][1] = 1;
+  matrix[0][0] = .5;
+  matrix[0][1] = .5;
   matrix[1][2] = 1;
   matrix[2][0] = 1;
 
@@ -18,12 +19,12 @@ int main(){
   double T = 8.5;
   
   //simulate discrete time Markov Chain
-  //unsigned int N = 100000;
-  //std::map<int, int> hist;
+  unsigned int N = 10;
+  std::map<int, int> hist;
   std::vector<int> discreteMC;
-  //for (unsigned int i = 0; i < N; ++i){
+  for (unsigned int i = 0; i < N; ++i){
 	 discreteMC = DTMC(matrix, steps, start);
-//	  ++hist[std::round(discreteMC.back())];
+	  ++hist[std::round(discreteMC.back())];
 //  }
   //Returns an array with the states at each step of the discrete-time Markov Chain
   //The number of transitions is given by steps. The initial state is given by start 
@@ -34,8 +35,8 @@ int main(){
 
   std::cout  << std::endl;
 
-//  for (auto p : hist)
-//	  std::cout << p.first << "\t" << p.second << std::endl;
+  for (auto p : hist)
+	  std::cout << p.first << "\t" << p.second/N << std::endl;
 
 
    std::cout<<std::endl << "End State is: " << discreteMC.back() << std::endl << std::endl;

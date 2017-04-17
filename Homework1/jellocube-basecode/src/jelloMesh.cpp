@@ -180,7 +180,7 @@ void JelloMesh::InitJelloMesh()
 				float x = -m_width*0.5f + wcellsize*i;
 				float y = 0.5 + hcellsize*j;
 				float z = -m_depth*0.5f + dcellsize*k;
-				m_vparticles[i][j][k] = Particle(GetIndex(i, j, k), vec3(x, y, z));
+				m_vparticles[i][j][k] = Particle(GetIndex(i, j, k), vec3(x, y, z)); 
 			}
 		}
 	}
@@ -565,10 +565,10 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder, //M
 		return true;
 	}
 
-	else if (dist < cylinderRadius)
+	else if (dist < cylinderRadius + 0.05)
 	{
 		result.m_p = p.index;
-		result.m_distance = dist - cylinderRadius;
+		result.m_distance = dist - (cylinderRadius + 0.05);
 		result.m_type = COLLISION;
 		result.m_normal = normal.Normalize();
 		return true;
@@ -593,9 +593,9 @@ bool JelloMesh::SphereIntersection(Particle& p, World::Sphere* sphere,
 		return true;
 
 	}
-	if (dist < sphereRadius)
+	if (dist < sphereRadius + 0.05)
 	{
-		result.m_distance = dist - sphereRadius;
+		result.m_distance = dist - (sphereRadius + 0.05);
 		result.m_p = p.index;
 		result.m_normal = normal.Normalize();
 		result.m_type = COLLISION;
