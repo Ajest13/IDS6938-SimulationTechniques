@@ -6,6 +6,7 @@
 This is the framework for homework #3. 
 
 The assignment is due: **Monday, April  24 at 11:59PM (EST)**
+Using 2 grace days, New due date: **Wednesday, April 26 at 11:59PM (EST)**
 
 # Introduction
 The goal of this assignment is to enable the behavioral animation of vehicle-like walking agents. 
