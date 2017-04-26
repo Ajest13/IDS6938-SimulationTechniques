@@ -400,7 +400,9 @@ The logic map starts with pedestrians having an equal probability(.2) of choosin
 ![](images/CREOLFireDrillParameters.PNG?raw=true)
 
 After the release of the students (FireDrill implementation), they are given a 1/3 probability of selecting 1 safezone of the 3 nearest to them located outside of the building. This eventually leads to a pedestrian sink so that in the case of a real emergency they cannot reenter the building.
-###Statistics
+
+### Statistics
+
 The traffic statistics are were visualized using a bar chart and a time plot. The time plot shows the flow of traffic through each exit over time as the fire drill comences. The bar chart represents the percentage of students that used each exit to reach their safe zone area goal. Lastly, a density heatmap  was implented to show the agent density throughout the simulation.
 The following image is a representation of the exit traffic percentages.
 
