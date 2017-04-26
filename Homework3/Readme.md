@@ -324,31 +324,41 @@ The goal of this part of the assigment is to simulate the pedestrain flow for va
 My initial step was to find maze and upload the image to AnyLogic. I then began to create the boundaries(walls) of the maze using the "Wall" drawing tool within the pedestrian pallet.
 
 After the general mapping of the maze boundaries was completed, I implemented targetLines at "dead ends" that were not imediately obvious when trying to solve the maze. These lines represnt possible target locations where the agents could arrive.
+
 ![](images/MazeWalls.PNG?raw=true)
 
 Following the placement of the "dead ends" I created the decision logic for the agents. By default, the agents find the most direct route to the ped sink unless decision trees (pedSelectOutputs) are implemented. Most of the decisions trees (pedSelectOutputs) involve a .5 probability of the agent going to a dead end and a .5 probability of moving to the next decision tree. This is represented by the following image.
+
 ![](images/MazeLogicMapping1.PNG?raw=true)
+
 The only time this changes is when a a specific route can lead to more than 1(one)"dead end" targetLine(Complex Route). This happens exactly twice within my maze setup with two Complex Routes having 2 seperate "dead ends" within the route. The probability tree becomes slightly more complicated at this point. I created the decision tree logic so that the agents have a .25 probability of selecting either deadend within the complex route as well as a .25 probability of selecting the folowing "dead end" after the route and a .25 probability of moving on to the subsequent decision tree. For increased realism, I made subtrees to these complex routes to allow the agents to have a probability of selecting the other dead end within the same route after the first dead end was encountered and eventually moving to the next decision on the correct route. The logic map makes the assumption that the agents are intelligent and will not select or return to a dead end they have already selected.Therefore, this simulation does not account for disorientation.
 
 The following image shows the complete logic tree for the tringular maze with the complex route logic located at the end of the first and second row.
+
 ![](images/MazeLogic.PNG?raw=true)
 
 The following image displays the variation parameters set on the custom agents within the simulation. These parameters are Walking Speed (velocity), Acceleration, and gender. 
+
 ![](images/MazeRunnerParameters.PNG?raw=true)
 
 For custom agent "MazeRunner", The Velocity was set to a uniform distribution between  1.0 and 2.5 meters per second. The velocity of a walking human is 1.4 meters per second but can be as fast as 2.5 meters per second.(source: Pachi, Ikaterini, and Tianjian Ji. "Frequency and velocity of people walking." The Structural Engineer 83.3 (2005) Web. 24 Apr. 2017.)
 The following image shows this being represented in the default value field.
+
 ![](images/MazeRunnerVelocity.PNG?raw=true)
 
 The acceleration or "step frequency" is dependant of many factors including gait and height. I chose a relatively small distribution to simulate the difference in acceleration without know the height and gait of the individual agents. The acceleratioin is uniformly distributed between .68 and 1.45 as shown in the following image.
+
 ![](images/MazeRunnerAcceleration.PNG?raw=true)
 
 The final parameter implemented was intended to pull statistics relating to the gender of the agent by assigning each agent an integer value of 0 or 1. Unfortunately I was unsuccessful in my attempts to pull statistics from customized agent parameters such as gender.
+
 ![](images/MazeRunnerGender.PNG?raw=true)
 
 Lastly, I generated intensity(.intensity()) and pedestrian count (countPeds()) statistics over time and displayed them in a line graph as well as bar chart. The line graph is useful in displaying the decaying traffic at dead ends over time as the agents pass that part of the Logic Tree. The bar chart shows the pedestrian count at the dead ends at any given time as a percentage of the entire traffic.
 The following iteration of the simulation shows that Dead End 2 was the most visited and Dead End 4 was the least visited.
+
 ![](images/MazeBarGraph.PNG?raw=true)
+
 ![](images/MAZEMapping.PNG?raw=true)
 
 A density heatmap was implemented to the final simulation to give a visual representation of the most visited "dead ends" and routes traveled over time. 
@@ -358,28 +368,46 @@ The simulation can be viewed in 2d and 3d through the following link.
 [Maze Simulation Video](https://youtu.be/XrlICHCPMYA)
 
 **(b) - 30 points**: Model and analyze a building (or floor/outdoor space/stadium) on campus. (There is help on piazza how to find rough building plans - we expect something plausible). Create a senario: evacuation, daily office routine, special event, normal egress.... etc., and model and design your own experiment to determine if the building design suits the needs of its users. Start with photographs of your site, describe your site, describe your senario and hypothesis. Then use an agent-based pedistrian simulation to visualize your experiment's results.
+
 ![](images/CREOLphoto.PNG?raw=true)
+
 For my experiment I chose to map out the CREOL building on UCF's main campus. This building houses the College of Optics and Photonics.
 
 For my experiment I have chosen to simulate a firedrill to understand pedestrian flow pertaining to the use of the exits in an emergency building evacuation. This simulation is useful to pull information and statistics for risk mitigation and possible contingency plans for exits that tend to have a higher traffic density
+
 #####The Problem
+
 Which of the exits has the heaviest flow of traffic in the instance of a fire or firedrill. 
+
 #####The Hypothesis
+
 I hypothesize the main entrance will have the highest traffic flow due to its its location.
+
 #####Simulation Setup
+
 ######Mapping
+
 The first step in the setup process was to map out the walls using "Wall" drawing tool in the pedestrian palette. The building was then seperated in to 5 areas with attractor set within classrooms, labs, bathrooms etc. I then proceeded to mark each exit with pedFlowStatistic targetLines to pull the traffic statistics of each exit at the time of the fire drill. The last part of the mapping phase was to draw safe zone areas outside of the building as target locations for the agents during the fire drill.
+
 ![](images/CREOLMapping.PNG?raw=true)
+
 ######Logic Diagram
+
 ![](images/CREOLLogicmap.PNG?raw=true)
+
 The logic map starts with pedestrians having an equal probability(.2) of choosing 1 of the 5 building areas and then moving toward any of the implemented attactors within that area. At this point the are place in a pedestrian wait until the "FireDrill" event releases them. The following image displays the parameters of the FireDrill which is ran after 20 min allowing for students to be situated in there destination.
+
 ![](images/CREOLFireDrillParameters.PNG?raw=true)
+
 After the release of the students (FireDrill implementation), they are given a 1/3 probability of selecting 1 safezone of the 3 nearest to them located outside of the building. This eventually leads to a pedestrian sink so that in the case of a real emergency they cannot reenter the building.
 ######Statistics
 The traffic statistics are were visualized using a bar chart and a time plot. The time plot shows the flow of traffic through each exit over time as the fire drill comences. The bar chart represents the percentage of students that used each exit to reach their safe zone area goal. Lastly, a density heatmap  was implented to show the agent density throughout the simulation.
 The following image is a representation of the exit traffic percentages.
+
 ![](images/CREOLStatistics.PNG?raw=true)
+
 ######Conclusion
+
 After running the simulation I have to reject my hypothesis. The most populated building exit was not the main entrance but rather Exit 4 which is located in the opposite corner. This tends to be where the majority of classrooms are located. The reason for this could also be due to its proximity to two of the safezones which were assigned to it.
 
 The following is a link to the running simulation video in 2d and 3d.
