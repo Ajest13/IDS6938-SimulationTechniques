@@ -375,23 +375,23 @@ For my experiment I chose to map out the CREOL building on UCF's main campus. Th
 
 For my experiment I have chosen to simulate a firedrill to understand pedestrian flow pertaining to the use of the exits in an emergency building evacuation. This simulation is useful to pull information and statistics for risk mitigation and possible contingency plans for exits that tend to have a higher traffic density
 
-###The Problem
+### The Problem
 
 Which of the exits has the heaviest flow of traffic in the instance of a fire or firedrill. 
 
-###The Hypothesis
+### The Hypothesis
 
 I hypothesize the main entrance will have the highest traffic flow due to its its location.
 
-###Simulation Setup
+## Simulation Setup
 
-######Mapping
+### Mapping
 
 The first step in the setup process was to map out the walls using "Wall" drawing tool in the pedestrian palette. The building was then seperated in to 5 areas with attractor set within classrooms, labs, bathrooms etc. I then proceeded to mark each exit with pedFlowStatistic targetLines to pull the traffic statistics of each exit at the time of the fire drill. The last part of the mapping phase was to draw safe zone areas outside of the building as target locations for the agents during the fire drill.
 
 ![](images/CREOLMapping.PNG?raw=true)
 
-###Logic Diagram
+### Logic Diagram
 
 ![](images/CREOLLogicmap.PNG?raw=true)
 
@@ -406,7 +406,7 @@ The following image is a representation of the exit traffic percentages.
 
 ![](images/CREOLStatistics.PNG?raw=true)
 
-###Conclusion
+### Conclusion
 
 After running the simulation I have to reject my hypothesis. The most populated building exit was not the main entrance but rather Exit 4 which is located in the opposite corner. This tends to be where the majority of classrooms are located. The reason for this could also be due to its proximity to two of the safezones which were assigned to it.
 
