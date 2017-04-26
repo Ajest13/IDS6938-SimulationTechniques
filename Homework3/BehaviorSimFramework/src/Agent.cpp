@@ -228,18 +228,18 @@ void SIMAgent::InitValues()
 	SIMAgent::KSeparate, SIMAgent::KAlign, SIMAgent::KCohesion.
 	*********************************************/
 	Kv0 = 10.0;
-	Kp1 = -450.0;
+	Kp1 = -50.0;
 	Kv1 = 10.0;
 	KArrival = 0.02;
-	KDeparture = 2000.0;
-	KNoise = 3.0;
+	KDeparture = 1000.0;
+	KNoise = 10.0;
 	KWander = 10.0;
-	KAvoid = 1.0;
-	TAvoid = 2.0;
-	RNeighborhood = 300.0;
-	KSeparate = 10.0;
-	KAlign = 30.0;
-	KCohesion = 0.05;
+	KAvoid = 350;
+	TAvoid = .75;
+	RNeighborhood = 500.0;
+	KSeparate = 350.0;
+	KAlign = 6.0;
+	KCohesion = 6.0;
 }
 
 /*
@@ -264,10 +264,10 @@ void SIMAgent::Control()
 void SIMAgent::FindDeriv()
 {
 	//Ref:header file
-	deriv[0] = state[2]; //velocity
-	deriv[1] = state[3]; //angular velocity
-	deriv[2] = input[0] / Mass; //force/mass
-	deriv[3] = input[1] / Inertia; //torque/inertia
+	deriv[0] = state[2]; 
+	deriv[1] = state[3];
+	deriv[2] = input[0] / Mass; 
+	deriv[3] = input[1] / Inertia; 
 }
 
 /*
@@ -309,12 +309,9 @@ void SIMAgent::UpdateState()
 */
 vec2 SIMAgent::Seek()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp; 			  
 	tmp = goal - GPos; 
-	vd = SIMAgent::MaxVelocity/2;
+	vd = SIMAgent::MaxVelocity;
 
 	thetad = atan2(tmp[1], tmp[0]);
 
@@ -332,15 +329,13 @@ vec2 SIMAgent::Seek()
 */
 vec2 SIMAgent::Flee()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
 	
 	tmp = goal - GPos;
-	vd = SIMAgent::MaxVelocity / 2;
+	vd = MaxVelocity;
 	
 	thetad = atan2(tmp[1], tmp[0]) + M_PI;
+	
 	
 	return vec2(cos(thetad)* vd, sin(thetad) * vd);
 }
@@ -356,16 +351,15 @@ vec2 SIMAgent::Flee()
 */
 vec2 SIMAgent::Arrival()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
+
 	vec2 tmp;
 
 
 	tmp = goal - GPos; 
 	vd = tmp.Length()*KArrival;
 	
-	Truncate(vd, 0, SIMAgent::MaxVelocity);	
+	Truncate(vd, 0, MaxVelocity);	
+	
 	tmp.Normalize();
 	thetad = atan2(tmp[1], tmp[0]);
 
@@ -383,16 +377,14 @@ vec2 SIMAgent::Arrival()
 */
 vec2 SIMAgent::Departure()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
 
 
 	tmp = goal - GPos; 
 	vd = (KDeparture - tmp.Length()) * KArrival;
 	
-	Truncate(vd, 0, SIMAgent::MaxVelocity); 
+	Truncate(vd, 0, MaxVelocity); 
+	
 	tmp.Normalize();
 	thetad = atan2(tmp[1], tmp[0]) + M_PI; 		
 
@@ -411,15 +403,15 @@ vec2 SIMAgent::Departure()
 */
 vec2 SIMAgent::Wander()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
-
+	float center = (GPos + v0).Length();
 	float angle = float(rand() % 360) / 180.0 * M_PI;
-	thetad = angle;
-	vd = SIMAgent::MaxVelocity / 2;
-
-	return vec2((cos(thetad)*vd)*KNoise, (sin(thetad)*vd)*KNoise)*KWander;
+	vWander[0] = cos(angle) * KWander;
+	vWander[1] = sin(angle) * KWander;
+	
+	thetad = atan2(vWander[1], vWander[0]);
+	vd = center * KNoise;
+	
+	return vec2((cos(thetad)*vd), (sin(thetad)*vd));
 }
 
 
@@ -437,18 +429,49 @@ vec2 SIMAgent::Wander()
 */
 vec2 SIMAgent::Avoid()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
-	vec2 sight;
-	sight = GPos + v0.Normalize() * SIMAgent::radius;
-
-			//vec2 tmp;
-
-			//return tmp;
-		
+	//Ref: https://gamedevelopment.tutsplus.com/tutorials/understanding-steering-behaviors-collision-avoidance--gamedev-7777
+	//Ref:http://www.futuredatalab.com/steeringbehaviors/
 	
+	//Normal seek movement (Can be replaced with Wandering Code)
+	vec2 tmp;
+	tmp = goal - GPos;
+	tmp.Normalize();
+	thetad = atan2(tmp[1], tmp[0]);
+	vd = MaxVelocity / 2;
+
+
+	for (int i = 0; i < env->obstaclesNum; i++)
+	{
+
+		//convert object coordinates to vector
+		vec2 obsPos;
+		obsPos[1] = env->obstacles[i][1];
+		obsPos[0] = env->obstacles[i][0];
+
+		//Sight vectors for collision check
+		vec2 sight = GPos + v0.Normalize() * KAvoid;
+		vec2 sight2 = GPos + v0.Normalize() * KAvoid * .5;
+
+		//Check collision
+		vec2 check = (obsPos - sight);
+		vec2 check2 = (obsPos - sight2);
+
+		//Radius length additions
+		float rad = env->obstacles[i][2] + radius;
+
+		if (check.Length() <= rad + KAvoid || check2.Length() <= rad + KAvoid)
+		{
+			//Updating theta and vd
+			thetad = thetad + TAvoid;
+			vd = (rad - tmp.Length()) * rad;
+			ClampAngle(thetad);
+
+			return vec2(cos(thetad)*vd, sin(thetad)*vd);
+		}
+	}
+	return vec2(cos(thetad)*vd, sin(thetad)*vd);
 }
+		
 
 
 /*
@@ -461,12 +484,30 @@ vec2 SIMAgent::Avoid()
 */
 vec2 SIMAgent::Separation()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
+	vec2 sum(0.0, 0.0);
+	int neighbors = 0;
 
-	return tmp;
+
+	for (int i = 0; i < agents.size(); i++)
+	{
+		tmp = agents[i]->GPos - GPos;
+		
+		if (tmp.Length() < RNeighborhood)
+		{
+			tmp = goal - agents[i]->GPos;
+			//tmp = agents[i]->GPos - GPos;
+			tmp = tmp.Normalize();
+			sum += (tmp / tmp.Length()) * KSeparate;
+			neighbors++;
+		}
+	}
+	//sum = sum / neighbors;
+	tmp = goal - GPos + sum;
+	thetad = atan2(tmp[1], tmp[0]);
+	vd = MaxVelocity;
+	
+	return vec2(cos(thetad)*vd, sin(thetad)*vd);
 }
 
 /*
@@ -479,12 +520,26 @@ vec2 SIMAgent::Separation()
 */
 vec2 SIMAgent::Alignment()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
+	vec2 sum(0.0, 0.0);
 
-	return tmp;
+	for (int i = 0; i < agents.size(); i++)
+	{
+		tmp = agents[i]->GPos - GPos;
+
+		if (tmp.Length() < RNeighborhood)
+		{
+			sum = agents[i]->v0.Normalize();
+		}
+	}
+
+	tmp = goal - GPos + sum;
+	thetad = atan2(tmp[1], tmp[0]);
+	vd = tmp.Length() * KAvoid;
+	
+	Truncate(vd, 0, MaxVelocity);
+	
+	return vec2(cos(thetad)*vd, sin(thetad)*vd);
 }
 
 /*
@@ -497,13 +552,31 @@ vec2 SIMAgent::Alignment()
 */
 vec2 SIMAgent::Cohesion()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
+	vec2 sum(0.0, 0.0);
+	int neighbors = 0;
 
+	for (int i = 0; i < agents.size(); i++) 
+	{
+		tmp = agents[i]->GPos - GPos;
+		if (tmp.Length() < RNeighborhood) 
+		{
+			sum += tmp;
+			neighbors++;
+		}
 
-	return tmp;
+	}
+
+	sum = (sum / neighbors);
+	tmp = goal - GPos + sum;
+	vd = tmp.Length() * KAvoid;
+	
+	Truncate(vd, 0, MaxVelocity);
+
+	tmp.Normalize();
+	thetad = atan2(tmp[1], tmp[0]);
+
+	return vec2(cos(thetad)*vd, sin(thetad)*vd);
 }
 
 /*
@@ -515,10 +588,9 @@ vec2 SIMAgent::Cohesion()
 */
 vec2 SIMAgent::Flocking()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
+
+	tmp = (KSeparate * Separation()) + (KAlign * Alignment()) + (KCohesion * Cohesion());
 
 	return tmp;
 }
@@ -533,10 +605,13 @@ vec2 SIMAgent::Flocking()
 */
 vec2 SIMAgent::Leader()
 {
-	/*********************************************
-	// TODO: Add code here
-	*********************************************/
 	vec2 tmp;
-
+	if (agents[0] == this) 
+	{
+		return Seek();
+	}
+	else
+	tmp = (KSeparate * Separation()) + (KArrival * Arrival());
+	
 	return tmp;
 }
