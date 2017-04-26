@@ -52,7 +52,7 @@ SIMAgent::KNoise,	SIMAgent::KWander, SIMAgent::KAvoid, SIMAgent::TAvoid, SIMAgen
 	KAvoid = 350;
 	TAvoid = .75;
 	RNeighborhood = 500.0;
-	KSeparate = 500.0;
+	KSeparate = 350.0;
 	KAlign = 6.0;
 	KCohesion = 6.0;
 ```
@@ -375,15 +375,15 @@ For my experiment I chose to map out the CREOL building on UCF's main campus. Th
 
 For my experiment I have chosen to simulate a firedrill to understand pedestrian flow pertaining to the use of the exits in an emergency building evacuation. This simulation is useful to pull information and statistics for risk mitigation and possible contingency plans for exits that tend to have a higher traffic density
 
-#####The Problem
+###The Problem
 
 Which of the exits has the heaviest flow of traffic in the instance of a fire or firedrill. 
 
-#####The Hypothesis
+###The Hypothesis
 
 I hypothesize the main entrance will have the highest traffic flow due to its its location.
 
-#####Simulation Setup
+###Simulation Setup
 
 ######Mapping
 
@@ -391,7 +391,7 @@ The first step in the setup process was to map out the walls using "Wall" drawin
 
 ![](images/CREOLMapping.PNG?raw=true)
 
-######Logic Diagram
+###Logic Diagram
 
 ![](images/CREOLLogicmap.PNG?raw=true)
 
@@ -400,13 +400,13 @@ The logic map starts with pedestrians having an equal probability(.2) of choosin
 ![](images/CREOLFireDrillParameters.PNG?raw=true)
 
 After the release of the students (FireDrill implementation), they are given a 1/3 probability of selecting 1 safezone of the 3 nearest to them located outside of the building. This eventually leads to a pedestrian sink so that in the case of a real emergency they cannot reenter the building.
-######Statistics
+###Statistics
 The traffic statistics are were visualized using a bar chart and a time plot. The time plot shows the flow of traffic through each exit over time as the fire drill comences. The bar chart represents the percentage of students that used each exit to reach their safe zone area goal. Lastly, a density heatmap  was implented to show the agent density throughout the simulation.
 The following image is a representation of the exit traffic percentages.
 
 ![](images/CREOLStatistics.PNG?raw=true)
 
-######Conclusion
+###Conclusion
 
 After running the simulation I have to reject my hypothesis. The most populated building exit was not the main entrance but rather Exit 4 which is located in the opposite corner. This tends to be where the majority of classrooms are located. The reason for this could also be due to its proximity to two of the safezones which were assigned to it.
 
