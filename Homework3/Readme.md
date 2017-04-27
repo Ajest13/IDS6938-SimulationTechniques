@@ -1,5 +1,6 @@
 # Homework 3 : Agent based Simulation Assignment 
 
+### Alexander Almodovar
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
 [University of Central Florida](http://www.ist.ucf.edu/grad/)
